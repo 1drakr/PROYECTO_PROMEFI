@@ -5,6 +5,7 @@ use App\Http\Controllers\SolicitudproyectoController;
 use App\Http\Controllers\EvaluarproyectoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectEvaluationController;
+use App\Http\Controllers\PersonaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,7 +24,7 @@ Route::resource('/recompensa', App\Http\Controllers\RecompensaController::class)
 Route::resource('/complemento', App\Http\Controllers\ComplementoController::class);
 Route::resource('/historium', App\Http\Controllers\HistoriumController::class);
 Route::resource('/preguntafrecuente', App\Http\Controllers\PreguntafrecuenteController::class);
-Route::resource('/persona', App\Http\Controllers\PersonaController::class);
+Route::resource('/persona', PersonaController::class);
 Route::resource('/colaborador', App\Http\Controllers\ColaboradorController::class);
 Route::resource('/pago', App\Http\Controllers\PagoController::class);
 Route::resource('/solicitudproyecto', SolicitudproyectoController::class);
