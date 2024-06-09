@@ -95,13 +95,14 @@
                                     <th>Perfil Zona Horaria</th>
                                     <th>User Name</th>
                                     <th>User Email</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
 
                                 @forelse ($proyectos as $proyecto)
-                                    <tr>
+                                    <tr class="{{ $proyecto->ha_pasado_fecha_limite ? 'bg-warning' : '' }}">
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select proyecto"></td>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $proyecto->id_proyecto }}</td>
@@ -138,20 +139,18 @@
                                                             View
                                                         </a>
                                                         <a class="dropdown-item"
-                                                           {{-- href="{{ route('proyecto.edit',$proyecto->id_proyecto) }}"> --}}
+                                                           href="{{ route('proyecto.edit',$proyecto->id_proyecto) }}">
                                                             Edit
                                                         </a>
-                                                        {{-- <form action="{{ route('proyecto.destroy',$proyecto->id_proyecto) }}"
+                                                        <form action="{{ route('proyecto.finalizar', $proyecto->id_proyecto) }}"
                                                               method="POST">
                                                             @csrf
-                                                            @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Delete
+                                                                    onclick="if(!confirm('¿Deseas proceder con la finalización?')){return false;}"
+                                                                    class="dropdown-item text-red">
+                                                                Finalizar
                                                             </button>
-                                                        </form> --}}
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

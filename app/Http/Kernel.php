@@ -3,7 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
+use Illuminate\Console\Scheduling\Schedule ;
 class Kernel extends HttpKernel
 {
     /**
@@ -22,6 +22,17 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
+
+    protected $routeMiddleware = [
+        // ...
+        'role' => \App\Http\Middleware\CheckRole::class,
+    ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->job(new \App\Jobs\FinalizarProyectosJob)->daily();
+    }
+
 
     /**
      * The application's route middleware groups.

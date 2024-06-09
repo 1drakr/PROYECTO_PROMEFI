@@ -85,8 +85,8 @@
                                         </svg>
                                     </th>
 
-										<th>Id Perfil</th>
-										<th>Id Users</th>
+										<th>Id</th>
+										<th>Id Cuenta de Usuario</th>
 										<th>Nombre</th>
 										<th>Apellido</th>
 										<th>Avatar</th>
@@ -115,7 +115,7 @@
 											<td>{{ $perfil->Nombre }}</td>
 											<td>{{ $perfil->Apellido }}</td>
 											<td>{{ $perfil->Avatar }}</td>
-											<td>{{ $perfil->Biografia }}</td>
+											<td>{{ Str::limit($perfil->Biografia,20) }}</td>
 											<td>{{ $perfil->Privacidad }}</td>
 											<td>{{ $perfil->Ubicacion }}</td>
 											<td>{{ $perfil->ZonaHoraria }}</td>
@@ -134,11 +134,11 @@
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
                                                            href="{{ route('perfil.show',$perfil->id_perfil) }}">
-                                                            View
+                                                            Ver
                                                         </a>
                                                         <a class="dropdown-item"
                                                            href="{{ route('perfil.edit',$perfil->id_perfil) }}">
-                                                            Edit
+                                                            Editar
                                                         </a>
                                                         <form
                                                             action="{{ route('perfil.destroy',$perfil->id_perfil) }}"
@@ -149,7 +149,7 @@
                                                                     onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
-                                                                Delete
+                                                                Cambiar estado
                                                             </button>
                                                         </form>
                                                     </div>

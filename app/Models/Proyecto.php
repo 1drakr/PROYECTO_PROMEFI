@@ -3,47 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Solicitudproyecto;
 
-/**
- * Class Proyecto
- *
- * @property $id_proyecto
- * @property $titulo
- * @property $subtitulo
- * @property $categoria_principal
- * @property $categoria
- * @property $subcategoria
- * @property $ubicacion
- * @property $imagen
- * @property $video
- * @property $fecha_limite
- * @property $duracion_campaña
- * @property $monto_meta
- * @property $riesgos_desafios
- * @property $uso_ia
- * @property $tipo_proyecto
- * @property $pago
- * @property $estado
- * @property $completado
- * @property $created_at
- * @property $updated_at
- *
- * @property Colaborador[] $colaboradors
- * @property Complemento[] $complementos
- * @property Finalizacionproyecto[] $finalizacionproyectos
- * @property Historia[] $historias
- * @property Pago[] $pagos
- * @property PagoCreador[] $pagoCreadors
- * @property PagoPatrocinador[] $pagoPatrocinadors
- * @property Persona $persona
- * @property Preguntafrecuente[] $preguntafrecuentes
- * @property Recompensa[] $recompensas
- * @property Solicitudproyecto[] $solicitudproyectos
- * @property Perfil $perfil
- * @property User $user
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Proyecto extends Model
 {
     protected $table = 'proyecto';
@@ -72,11 +33,6 @@ class Proyecto extends Model
 
     protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'id_perfil', 'titulo', 'subtitulo', 'categoria_principal', 'categoria', 'subcategoria',
         'ubicacion', 'imagen', 'video', 'fecha_limite', 'duracion_campaña', 'monto_meta',
@@ -125,7 +81,7 @@ class Proyecto extends Model
 
     public function solicitudproyectos()
     {
-        return $this->hasMany('App\Models\Solicitudproyecto', 'id_proyecto', 'id_proyecto');
+        return $this->hasMany(Solicitudproyecto::class, 'id_proyecto', 'id_proyecto');
     }
 
     public function users()

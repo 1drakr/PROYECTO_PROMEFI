@@ -3,19 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finalizacionproyecto;
+use App\Models\AmpliacionFecha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-/**
- * Class FinalizacionproyectoController
- * @package App\Http\Controllers
- */
 class FinalizacionproyectoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $finalizacionproyectos = Finalizacionproyecto::paginate(10);
@@ -24,23 +19,12 @@ class FinalizacionproyectoController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $finalizacionproyectos->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $finalizacionproyecto = new Finalizacionproyecto();
         return view('finalizacionproyecto.create', compact('finalizacionproyecto'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(Finalizacionproyecto::$rules);
@@ -50,13 +34,6 @@ class FinalizacionproyectoController extends Controller
         return redirect()->route('finalizacionproyectos.index')
             ->with('success', 'Finalizacionproyecto created successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $finalizacionproyecto = Finalizacionproyecto::find($id);
@@ -64,12 +41,6 @@ class FinalizacionproyectoController extends Controller
         return view('finalizacionproyecto.show', compact('finalizacionproyecto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $finalizacionproyecto = Finalizacionproyecto::find($id);
@@ -77,13 +48,6 @@ class FinalizacionproyectoController extends Controller
         return view('finalizacionproyecto.edit', compact('finalizacionproyecto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Finalizacionproyecto $finalizacionproyecto
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Finalizacionproyecto $finalizacionproyecto)
     {
         request()->validate(Finalizacionproyecto::$rules);
@@ -94,16 +58,39 @@ class FinalizacionproyectoController extends Controller
             ->with('success', 'Finalizacionproyecto updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+    public function apelacion($id)
+    {
+        $finalizacionproyecto = Finalizacionproyecto::findOrFail($id);
+        return view('finalizacionproyecto.apelacion', compact('finalizacionproyecto'));
+    }
+
+    public function storeApelacion(Request $request, $id)
+    {
+        $request->validate([
+            'justificacion' => 'required|string',
+            'documento_justificacion' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'nueva_fecha_limite' => 'required|date|after:today'
+        ]);
+
+        $finalizacionproyecto = Finalizacionproyecto::findOrFail($id);
+        $data = $request->all();
+        $data['id_proyecto'] = $finalizacionproyecto->id_proyecto;
+        $data['id_perfil'] = Auth::user()->perfil->id_perfil;
+
+        if ($request->hasFile('documento_justificacion')) {
+            $data['documento_justificacion'] = $request->file('documento_justificacion')->store('documentos_justificacion', 'public');
+        }
+
+        AmpliacionFecha::create($data);
+
+        return redirect()->route('finalizacionproyecto.index')->with('success', 'Solicitud de ampliación de fecha enviada correctamente.');
+    }
+
     public function destroy($id)
     {
         $finalizacionproyecto = Finalizacionproyecto::find($id)->delete();
 
-        return redirect()->route('finalizacionproyectos.index')
+        return redirect()->route('finalizacionproyecto.index')
             ->with('success', 'Finalizacionproyecto deleted successfully');
     }
 }

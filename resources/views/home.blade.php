@@ -53,6 +53,12 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
+            <!-- Mostrar mensajes de error -->
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="row row-deck row-cards">
                 <div class="col-12">
                     <div class="card">

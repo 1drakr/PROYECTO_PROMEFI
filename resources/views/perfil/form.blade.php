@@ -1,5 +1,6 @@
 
 <div class="form-group mb-3">
+    @if(isset($perfil->id_perfil))
     <label class="form-label">   {{ Form::label('id_perfil') }}</label>
     <div>
         {{ Form::text('id_perfil', $perfil->id_perfil, ['class' => 'form-control' .
@@ -7,6 +8,7 @@
         {!! $errors->first('id_perfil', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">perfil <b>id_perfil</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('id_users') }}</label>

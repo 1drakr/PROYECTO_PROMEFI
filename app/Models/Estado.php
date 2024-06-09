@@ -4,21 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Estado
- *
- * @property $id_estado
- * @property $nombre_estado
- * @property $created_at
- * @property $updated_at
- *
- * @property Evaluarproyecto[] $evaluarproyectos
- * @property Proyecto[] $proyectos
- * @property Solicitudproyecto[] $solicitudproyectos
- * @property Validacionproyecto[] $validacionproyectos
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Estado extends Model
 {
     protected $table = 'estado';

@@ -8,17 +8,8 @@ use App\Models\Perfil;
 use App\Models\Evaluarproyecto;
 
 
-/**
- * Class SolicitudproyectoController
- * @package App\Http\Controllers
- */
 class SolicitudproyectoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $solicitudproyectos = Solicitudproyecto::with(['proyecto.recompensas', 'proyecto.perfil','user','estado'])->paginate(10);
@@ -62,23 +53,28 @@ class SolicitudproyectoController extends Controller
     }
 
 
-    public function storeEvaluacion(Request $request)
+    public function storeEvaluacion(Request $request, $id)
     {
         $request->validate([
-            'id_solicitudProy' => 'required|exists:solicitudproyecto,id_solicitudProy',
             'id_perfil' => 'required|exists:perfil,id_perfil',
         ]);
-        //dd($request);
+
         Evaluarproyecto::create([
-            'id_solicitud' => $request->id_solicitudProy,
+            'id_solicitud' => $id,
             'id_evauser' => $request->id_perfil,
             'documento_proyecto' => "null",
             'documento_evaluacion' => "null",
             'id_estado' => 2,
         ]);
 
-        return redirect()->route('solicitudproyecto.index')->with('success', 'Evaluador asignado correctamente');
+        // Cambiar el estado de la solicitud del proyecto a 8
+        $solicitudproyecto = Solicitudproyecto::find($id);
+        $solicitudproyecto->id_estado = 8;
+        $solicitudproyecto->save();
+
+        return redirect()->route('solicitudproyecto.index')->with('success', 'Evaluador asignado y estado de la solicitud cambiado correctamente');
     }
+
 
     public function edit($id)
     {

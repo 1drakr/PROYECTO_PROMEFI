@@ -186,7 +186,7 @@ return [
                 ],
                 [
                     'text' => 'Finalizacion de Proyecto',
-                    'url' => '/finalizacionproyect',
+                    'url' => '/finalizacionproyecto',
                     'icon' => 'ti ti-article',
                 ]
             ],

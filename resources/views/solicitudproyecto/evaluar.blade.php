@@ -49,24 +49,17 @@
                         </div>
                         <div class="card-body">
                             <!-- Formulario para asignar evaluador -->
-                            <form action="{{ route('solicitudproyecto.storeEvaluacion') }}" method="POST">
+                            <form action="{{ route('solicitudproyecto.storeEvaluacion', $solicitudproyecto->id_solicitudProy) }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="id_solicitudProy" value="{{ $solicitudproyecto->id_solicitudProy }}">
                                 <div class="form-group mb-3">
-                                    <label class="form-label">{{ Form::label('evaluadores', 'Evaluadores y Administradores') }}</label>
-                                    <div>
-                                        <select class="form-control{{ $errors->has('evaluadores') ? ' is-invalid' : '' }}" name="id_perfil">
-                                            @foreach($usuariosEvaluadores as $perfil)
-                                                <option value="{{ $perfil->id_perfil }}">{{ $perfil->Nombre }} {{ $perfil->Apellido }}</option>
-                                            @endforeach
-                                        </select>
-                                        {!! $errors->first('evaluadores', '<div class="invalid-feedback">:message</div>') !!}
-                                        <small class="form-hint">Selecciona un evaluador o administrador.</small>
-                                    </div>
+                                    <label for="evaluador_id" class="form-label">Seleccionar Evaluador:</label>
+                                    <select name="id_perfil" id="evaluador_id" class="form-control">
+                                        @foreach($usuariosEvaluadores as $evaluador)
+                                            <option value="{{ $evaluador->id_perfil }}">{{ $evaluador->Nombre }} {{ $evaluador->Apellido }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-footer">
-                                    <button type="submit" class="btn btn-danger">Asignar Evaluador</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Asignar Evaluador</button>
                             </form>
                         </div>
                     </div>

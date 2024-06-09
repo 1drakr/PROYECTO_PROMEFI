@@ -5,27 +5,17 @@
 @endsection
 
 @section('content')
-    <!-- Page header -->
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        List
-                    </div>
-                    <h2 class="page-title">
-                        {{ __('Finalizacionproyecto ') }}
-                    </h2>
+                    <div class="page-pretitle">List</div>
+                    <h2 class="page-title">{{ __('Finalizacionproyecto ') }}</h2>
                 </div>
-                <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('finalizacionproyectos.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
+                        <a href="{{ route('finalizacionproyecto.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
@@ -37,7 +27,6 @@
             </div>
         </div>
     </div>
-    <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
             @if(config('tablar','display_alert'))
@@ -54,16 +43,14 @@
                                 <div class="text-muted">
                                     Show
                                     <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="10" size="3"
-                                               aria-label="Invoices count">
+                                        <input type="text" class="form-control form-control-sm" value="10" size="3" aria-label="Invoices count">
                                     </div>
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
                                     Search:
                                     <div class="ms-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm"
-                                               aria-label="Search invoice">
+                                        <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
                                     </div>
                                 </div>
                             </div>
@@ -72,65 +59,49 @@
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
                                 <tr>
-                                    <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                           aria-label="Select all invoices"></th>
+                                    <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices"></th>
                                     <th class="w-1">No.
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="icon icon-sm text-dark icon-thick" width="24" height="24"
-                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                             stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm text-dark icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24h24" fill="none"/>
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
-                                    
-										<th>Id Finalizacionproyecto</th>
-										<th>Id Proyecto</th>
-										<th>Id Perfil</th>
-										<th>Documento Recompensa</th>
-
+                                    <th>Id Finalizacionproyecto</th>
+                                    <th>Id Proyecto</th>
+                                    <th>Id Perfil</th>
+                                    <th>Documento Recompensa</th>
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
                                 @forelse ($finalizacionproyectos as $finalizacionproyecto)
                                     <tr>
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select finalizacionproyecto"></td>
+                                        <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select finalizacionproyecto"></td>
                                         <td>{{ ++$i }}</td>
-                                        
-											<td>{{ $finalizacionproyecto->id_finalizacionproyecto }}</td>
-											<td>{{ $finalizacionproyecto->id_proyecto }}</td>
-											<td>{{ $finalizacionproyecto->id_perfil }}</td>
-											<td>{{ $finalizacionproyecto->documento_recompensa }}</td>
-
+                                        <td>{{ $finalizacionproyecto->id_finalizacionproyecto }}</td>
+                                        <td>{{ $finalizacionproyecto->id_proyecto }}</td>
+                                        <td>{{ $finalizacionproyecto->perfil->Nombre }} {{ $finalizacionproyecto->perfil->Apellido }}</td>
+                                        <td>{{ $finalizacionproyecto->documento_recompensa }}</td>
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
-                                                    <button class="btn dropdown-toggle align-text-top"
-                                                            data-bs-toggle="dropdown">
+                                                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('finalizacionproyectos.show',$finalizacionproyecto->id) }}">
+                                                        <a class="dropdown-item" href="{{ route('finalizacionproyecto.show', $finalizacionproyecto->id_finalizacionproyecto) }}">
                                                             View
                                                         </a>
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('finalizacionproyectos.edit',$finalizacionproyecto->id) }}">
+                                                        <a class="dropdown-item" href="{{ route('finalizacionproyecto.edit', $finalizacionproyecto->id_finalizacionproyecto) }}">
                                                             Edit
                                                         </a>
-                                                        <form
-                                                            action="{{ route('finalizacionproyectos.destroy',$finalizacionproyecto->id) }}"
-                                                            method="POST">
+                                                        <a class="dropdown-item" href="{{ route('finalizacionproyecto.apelacion', $finalizacionproyecto->id_finalizacionproyecto) }}">
+                                                            Apelacion
+                                                        </a>
+                                                        <form action="{{ route('finalizacionproyecto.destroy', $finalizacionproyecto->id_finalizacionproyecto) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
+                                                            <button type="submit" onclick="if(!confirm('Do you Want to Proceed?')){return false;}" class="dropdown-item text-red"><i class="fa fa-fw fa-trash"></i>
                                                                 Delete
                                                             </button>
                                                         </form>
@@ -143,10 +114,9 @@
                                     <td>No Data Found</td>
                                 @endforelse
                                 </tbody>
-
                             </table>
                         </div>
-                       <div class="card-footer d-flex align-items-center">
+                        <div class="card-footer d-flex align-items-center">
                             {!! $finalizacionproyectos->links('tablar::pagination') !!}
                         </div>
                     </div>

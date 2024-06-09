@@ -50,8 +50,9 @@
                             <h3 class="card-title">Subir Documento de Validación</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('validacionproyecto.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('validacionproyecto.update', $validacionProyecto->id) }}" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group mb-3">
                                     <label class="form-label">Documento de Validación</label>
                                     <div>
@@ -59,6 +60,16 @@
                                         @error('documento_validacion')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Proyecto fue Aprobado?</label>
+                                    <div>
+                                        <select name="id_estado" class="form-control{{ $errors->has('id_estado') ? ' is-invalid' : '' }}">
+                                            <option value="12">Validación Aprobada</option>
+                                            <option value="9">Validación Rechazada</option>
+                                        </select>
+                                        {!! $errors->first('id_estado', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                 </div>
                                 <div class="form-footer">

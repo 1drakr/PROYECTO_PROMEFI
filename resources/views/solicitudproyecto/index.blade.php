@@ -85,7 +85,7 @@
                                         </svg>
                                     </th>
 
-										<th>Id Solicitudproy</th>
+										<th>Id</th>
                                         <th>Titulo</th>
                                         <th>Subtitulo</th>
                                         <th>Categoria Principal</th>
@@ -115,8 +115,8 @@
                                         <td>{{ ++$i }}</td>
 
 											<td>{{ $solicitudproyecto->id_solicitudProy }}</td>
-											<td>{{ $solicitudproyecto->proyecto->titulo }}</td>
-                                            <td>{{ $solicitudproyecto->proyecto->subtitulo }}</td>
+											<td>{{ Str::limit($solicitudproyecto->proyecto->titulo,20 )}}</td>
+                                            <td>{{ Str::limit($solicitudproyecto->proyecto->subtitulo,20) }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->categoria_principal }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->categoria }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->subcategoria }}</td>
@@ -124,7 +124,7 @@
                                             <td>{{ $solicitudproyecto->proyecto->fecha_limite }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->duracion_campaña }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->monto_meta }}</td>
-                                            <td>{{ $solicitudproyecto->proyecto->riesgos_desafios }}</td>
+                                            <td>{{ Str::limit($solicitudproyecto->proyecto->riesgos_desafios,20) }}</td>
                                             <td>{{ $solicitudproyecto->proyecto->tipo_proyecto }}</td>
 											<td>{{ $solicitudproyecto->user->name}}</td>
                                             <td>{{ $solicitudproyecto->user->email}}</td>

@@ -61,6 +61,8 @@ class ValidacionproyectoController extends Controller
     {
         $request->validate([
             'documento_validacion' => 'required|file|mimes:pdf,doc,docx|max:10240',
+            'id_estado' => 'required|in:9,12,13',
+            'archivo_correccion' => 'nullable|file|mimes:pdf,doc,docx|max:10240' // Archivo de corrección opcional
         ]);
 
         $validacionProyecto = ValidacionProyecto::findOrFail($id);
@@ -75,10 +77,32 @@ class ValidacionproyectoController extends Controller
             $validacionProyecto->documento_validacion = $documentoValidacionPath;
         }
 
+        if ($request->hasFile('archivo_correccion')) {
+            // Eliminar el archivo de corrección anterior si existe
+            if ($validacionProyecto->archivo_correccion) {
+                Storage::disk('public')->delete($validacionProyecto->archivo_correccion);
+            }
+
+            $archivoCorreccionPath = $request->file('archivo_correccion')->store('archivos_correccion', 'public');
+            $validacionProyecto->archivo_correccion = $archivoCorreccionPath;
+        }
+
+        $validacionProyecto->id_estado = $request->input('id_estado');
         $validacionProyecto->save();
+
+         // Agregar depuración para verificar la relación
+        $solicitudproyecto = $validacionProyecto->evaluarproyecto->solicitudproyecto;
+        $proyecto = $solicitudproyecto->proyecto;
+
+        // Cambiar el estado del proyecto relacionado de 6 a 7
+        if ($proyecto->id_estado == 6) {
+            $proyecto->id_estado = 7;
+            $proyecto->save();
+        }
 
         return redirect()->route('validacionproyecto.index')->with('success', 'Documento de validación actualizado correctamente.');
     }
+
 
     public function destroy($id)
     {

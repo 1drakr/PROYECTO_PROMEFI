@@ -9,11 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Historia;
 use App\Models\Recompensa;
 use App\Models\Perfil;
+use App\Models\Finalizacionproyecto;
 
-/**
- * Class ProyectoController
- * @package App\Http\Controllers
- */
 class ProyectoController extends Controller
 {
 
@@ -56,7 +53,7 @@ class ProyectoController extends Controller
             'uso_ia' => 0,
             'pago' => 0,
             'tipo_proyecto' => $request->tipo_proyecto,
-            'id_estado' => 1,
+            'id_estado' => 6,
             'completado' => 0,
             'id_perfil' => $perfil->id_perfil,
         ]);
@@ -121,6 +118,36 @@ class ProyectoController extends Controller
 
         return redirect()->route('proyectos.index')
             ->with('success', 'Proyecto updated successfully');
+    }
+
+    public function finalizar($id)
+    {
+        $proyecto = Proyecto::findOrFail($id);
+
+        // Verificar si el proyecto ya está finalizado
+        if ($proyecto->id_estado == 5 or $proyecto->id_estado == 4) {
+            return redirect()->route('proyecto.index')->with('error', 'El proyecto ya está finalizado.');
+        }
+        $proyecto->completado = 0;
+        $proyecto->save();
+
+        if ($proyecto->monto_meta <= $proyecto->recaudado) {
+            $proyecto->id_estado = 4;
+        }
+        // Obtener el evaluador asignado desde la evaluación del proyecto
+        $evaluarProyecto = $proyecto->solicitudproyectos->flatMap(function ($solicitud) {
+            return $solicitud->evaluarproyectos;
+        })->first();
+
+        $idPerfilEvaluador = $evaluarProyecto ? $evaluarProyecto->id_evauser : null;
+
+        Finalizacionproyecto::create([
+            'id_proyecto' => $proyecto->id_proyecto,
+            'id_perfil' => $idPerfilEvaluador,
+            'documento_recompensa' => '' // Dejar vacío en lugar de null
+        ]);
+        return redirect()->route('proyecto.index')
+            ->with('success', 'Proyecto created successfully.');
     }
 
     public function destroy($id)

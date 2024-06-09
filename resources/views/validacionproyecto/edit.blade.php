@@ -43,7 +43,26 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Proyecto fue Aprobado?</label>
+                                    <div>
+                                        <select name="id_estado" id="id_estado" class="form-control{{ $errors->has('id_estado') ? ' is-invalid' : '' }}">
+                                            <option value="12">Validación Aprobada</option>
+                                            <option value="9">Validación Rechazada</option>
+                                            <option value="13">Esperando Corrección</option>
+                                        </select>
+                                        {!! $errors->first('id_estado', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3" id="correction-file-group" style="display: none;">
+                                    <label class="form-label">Subir Archivo de Corrección</label>
+                                    <div>
+                                        <input type="file" name="archivo_correccion" class="form-control @error('archivo_correccion') is-invalid @enderror">
+                                        @error('archivo_correccion')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-footer">
                                     <button type="submit" class="btn btn-primary">Subir Documento</button>
                                 </div>
@@ -54,4 +73,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var estadoSelect = document.getElementById('id_estado');
+            var correctionFileGroup = document.getElementById('correction-file-group');
+
+            function toggleCorrectionFileGroup() {
+                if (estadoSelect.value == '13') {
+                    correctionFileGroup.style.display = 'block';
+                } else {
+                    correctionFileGroup.style.display = 'none';
+                }
+            }
+
+            estadoSelect.addEventListener('change', toggleCorrectionFileGroup);
+
+            // Call the function on page load to set the correct state
+            toggleCorrectionFileGroup();
+        });
+    </script>
 @endsection

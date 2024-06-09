@@ -51,7 +51,7 @@
             <p><strong>Status:</strong> {{ $solicitud->proyecto->estado->nombre }}</p>
         </div>
         <div class="section">
-            <h2>Profile Information</h2>
+            <h2>Informacion del perfil</h2>
             <p><strong>First Name:</strong> {{ $solicitud->proyecto->perfil->Nombre }}</p>
             <p><strong>Last Name:</strong> {{ $solicitud->proyecto->perfil->Apellido }}</p>
             <p><strong>Location:</strong> {{ $solicitud->proyecto->perfil->ubicacion }}</p>

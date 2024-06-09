@@ -82,6 +82,17 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Proyecto fue Aprobado ??</label>
+                                    <div>
+                                        <select name="id_estado" class="form-control{{ $errors->has('id_estado') ? ' is-invalid' : '' }}">
+                                            <option value="10">Evaluación Completada</option>
+                                            <option value="11">Evaluación Rechazada</option>
+                                        </select>
+                                        {!! $errors->first('id_estado', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                </div>
+
                                 <div class="form-footer">
                                     <div class="text-end">
                                         <div class="d-flex">

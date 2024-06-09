@@ -80,13 +80,6 @@ class EvaluarproyectoController extends Controller
         }
 
         $evaluarproyecto->update($request->except(['documento_proyecto', 'documento_evaluacion', 'documento_validacion']));
-
-        Log::info('Datos antes de guardar en ValidacionProyecto', [
-            'id_evaluacionproy' => $evaluarproyecto->id_evaluarproy,
-            'id_perfil' => $id_perfil,
-            'id_estado' => $id_estado,
-        ]);
-
         $validacionProyecto = new ValidacionProyecto();
         $validacionProyecto->id_evaluacionproy = $evaluarproyecto->id_evaluarproy;
         $validacionProyecto->documento_validacion = null;
@@ -157,6 +150,7 @@ class EvaluarproyectoController extends Controller
 
         $evaluarproyecto->comentarios = $request->input('comentarios');
         $evaluarproyecto->puntuacion = $request->input('puntuacion');
+        $evaluarproyecto->id_estado = $request->input('id_estado');
         $evaluarproyecto->save();
 
         return redirect()->route('evaluarproyecto.show', $id)->with('success', 'Evaluación enviada correctamente');
