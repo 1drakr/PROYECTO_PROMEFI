@@ -245,7 +245,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Gestonar finaciamiento',
-                    'url' => 'pago',
+                    'url' => '/pago',
                     'icon' => 'ti ti-article',
                 ]
             ],
@@ -254,11 +254,11 @@ return [
             'text' => 'Modulo ML',
             'url' => '#',
             'icon' => 'ti ti-tablet',
-            'active' => ['support5'],
+            'active' => ['Recomendacion'],
             'submenu' => [
                 [
                     'text' => 'Recomendacion',
-                    'url' => 'support3',
+                    'url' => '/algoritmo',
                     'icon' => 'ti ti-article',
                 ]
             ],

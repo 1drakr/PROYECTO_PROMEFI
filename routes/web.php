@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AlgoritmoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\SolicitudproyectoController;
@@ -20,6 +22,7 @@ use App\Http\Controllers\FinalizacionproyectoController;
 use  App\Http\Controllers\ValidacionproyectoController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\PredictionController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -60,6 +63,9 @@ Route::group(['middleware' => ['auth', 'role:Administrador']], function () {
     Route::resource('/pagopatrocinador', PagoPatrocinadorController::class);
     Route::resource('/pagocreador', PagoCreadorController::class);
     Route::resource('/estado', EstadoController::class);
+    Route::resource('/algoritmo', AlgoritmoController::class);
+    Route::get('/algoritmo/predict', [AlgoritmoController::class, 'predict'])->name('algoritmo.predict');
+
 
     // COMENTARIO
     Route::resource('comentario', ComentarioController::class);
