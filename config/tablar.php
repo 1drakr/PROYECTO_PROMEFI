@@ -71,6 +71,9 @@ return [
     //boxed, combo, condensed, fluid, fluid-vertical, horizontal, navbar-overlap, navbar-sticky, rtl, vertical, vertical-right, vertical-transparent
 
     'layout_light_sidebar' => null,
+
+
+
     'layout_light_topbar' => true,
     'layout_enable_top_header' => false,
 
@@ -164,6 +167,11 @@ return [
                     'text' => 'Asignar Rol',
                     'url' => '/rol',
                     'icon' => 'ti ti-list',
+                ],
+                [
+                    'text' => 'Estado',
+                    'url' => '/estado',
+                    'icon' => 'ti ti-list',
                 ]
             ],
         ],
@@ -218,13 +226,13 @@ return [
             'active' => ['Gestionar Bemeficio de Donador'],
             'submenu' => [
                 [
-                    'text' => 'Gestionar Bemeficio de Donador',
+                    'text' => 'Gestionar Beneficio de Donador',
                     'url' => '/recompensa',
                     'icon' => 'ti ti-article',
                 ],
                 [
                     'text' => 'Gestionar retroalimentacion',
-                    'url' => '/colaborador',
+                    'url' => '/comentario',
                     'icon' => 'ti ti-article',
                 ]
             ],
@@ -237,7 +245,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Gestonar finaciamiento',
-                    'url' => 'pago-creador',
+                    'url' => 'pago',
                     'icon' => 'ti ti-article',
                 ]
             ],

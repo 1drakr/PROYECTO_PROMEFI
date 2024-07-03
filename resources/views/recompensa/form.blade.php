@@ -1,5 +1,6 @@
 
 <div class="form-group mb-3">
+    @if(isset($recompensa->id_recompensa))
     <label class="form-label">   {{ Form::label('id_recompensa') }}</label>
     <div>
         {{ Form::text('id_recompensa', $recompensa->id_recompensa, ['class' => 'form-control' .
@@ -7,6 +8,7 @@
         {!! $errors->first('id_recompensa', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">recompensa <b>id_recompensa</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('id_proyecto') }}</label>

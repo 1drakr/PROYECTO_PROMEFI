@@ -1,5 +1,6 @@
 
 <div class="form-group mb-3">
+    @if(isset($pagoPatrocinador->id_pago_patrocinador))
     <label class="form-label">   {{ Form::label('id_pago_patrocinador') }}</label>
     <div>
         {{ Form::text('id_pago_patrocinador', $pagoPatrocinador->id_pago_patrocinador, ['class' => 'form-control' .
@@ -7,8 +8,10 @@
         {!! $errors->first('id_pago_patrocinador', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pagoPatrocinador <b>id_pago_patrocinador</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
+    @if(isset($pagoPatrocinador->id_proyecto))
     <label class="form-label">   {{ Form::label('id_proyecto') }}</label>
     <div>
         {{ Form::text('id_proyecto', $pagoPatrocinador->id_proyecto, ['class' => 'form-control' .
@@ -16,6 +19,7 @@
         {!! $errors->first('id_proyecto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pagoPatrocinador <b>id_proyecto</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('id_perfil') }}</label>
@@ -27,6 +31,7 @@
     </div>
 </div>
 <div class="form-group mb-3">
+    @if(isset($pagoPatrocinador->monto))
     <label class="form-label">   {{ Form::label('monto') }}</label>
     <div>
         {{ Form::text('monto', $pagoPatrocinador->monto, ['class' => 'form-control' .
@@ -34,6 +39,7 @@
         {!! $errors->first('monto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pagoPatrocinador <b>monto</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('metodo_pago') }}</label>

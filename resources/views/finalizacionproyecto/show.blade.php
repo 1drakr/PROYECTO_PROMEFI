@@ -48,8 +48,7 @@
                             <h3 class="card-title">Finalizacionproyecto Details</h3>
                         </div>
                         <div class="card-body">
-                            
-<div class="form-group">
+
 <strong>Id Finalizacionproyecto:</strong>
 {{ $finalizacionproyecto->id_finalizacionproyecto }}
 </div>

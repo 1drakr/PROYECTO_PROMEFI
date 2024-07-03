@@ -87,8 +87,6 @@ class EvaluarproyectoController extends Controller
         $validacionProyecto->id_estado = $id_estado;
         $validacionProyecto->save();
 
-        Log::info('ValidacionProyecto guardado correctamente');
-
         return redirect()->route('evaluarproyecto.index')
             ->with('success', 'La Evaluacion se envio a Validacion');
     }

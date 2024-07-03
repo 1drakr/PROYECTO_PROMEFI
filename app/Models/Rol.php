@@ -2,22 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Rol
- *
- * @property $id_rol
- * @property $Nombre
- * @property $created_at
- * @property $updated_at
- *
- * @property Perfil[] $perfils
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Rol extends Model
 {
+    use HasFactory;
     protected $table = 'rol';
     protected $primaryKey = 'id_rol';
 

@@ -10,14 +10,12 @@ return new class extends Migration
     {
         Schema::create('evaluarproyecto', function (Blueprint $table) {
             $table->id('id_evaluarproy');
-            $table->unsignedBigInteger('id_solicitud');
-            $table->binary('documento_proyecto');
-            $table->binary('documento_evaluacion');
-            $table->unsignedBigInteger('id_estado');
+            $table->foreignId('id_solicitud')->constrained('solicitudproyecto', 'id_solicitudProy');
+            $table->binary('documento_proyecto')->nullable();
+            $table->binary('documento_evaluacion')->nullable();
+            $table->foreignId('id_estado')->constrained('estado', 'id_estado');
+            $table->foreignId('id_evauser')->constrained('perfil', 'id_perfil');
             $table->timestamps();
-
-            $table->foreign('id_solicitud')->references('id_solicitudProy')->on('solicitudproyecto');
-            $table->foreign('id_estado')->references('id_estado')->on('estado');
         });
     }
 

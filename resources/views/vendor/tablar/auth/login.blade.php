@@ -14,7 +14,7 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email"
                                placeholder="your@email.com"
                                autocomplete="off">
                         @error('email')
@@ -55,7 +55,7 @@
                         </label>
                     </div>
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                        <button type="submit" class="btn btn-primary w-100" id="login-btn">Sign in</button>
                     </div>
                 </form>
             </div>

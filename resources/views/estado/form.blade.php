@@ -1,12 +1,14 @@
 
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('id_estado') }}</label>
-    <div>
-        {{ Form::text('id_estado', $estado->id_estado, ['class' => 'form-control' .
-        ($errors->has('id_estado') ? ' is-invalid' : ''), 'placeholder' => 'Id Estado']) }}
-        {!! $errors->first('id_estado', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">estado <b>id_estado</b> instruction.</small>
-    </div>
+    @if(isset($estado->id_estado))
+        <label class="form-label">   {{ Form::label('id_estado') }}</label>
+        <div>
+            {{ Form::text('id_estado', $estado->id_estado, ['class' => 'form-control' .
+            ($errors->has('id_estado') ? ' is-invalid' : ''), 'placeholder' => 'Id Estado']) }}
+            {!! $errors->first('id_estado', '<div class="invalid-feedback">:message</div>') !!}
+            <small class="form-hint">estado <b>id_estado</b> instruction.</small>
+        </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('nombre_estado') }}</label>

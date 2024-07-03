@@ -5,14 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Perfil;
 use Illuminate\Http\Request;
 
-/**
- * Class PerfilController
- * @package App\Http\Controllers
- */
 class PerfilController extends Controller
 {
-
-
     public function index()
     {
         $perfils = Perfil::paginate(10);

@@ -21,11 +21,9 @@
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('pagos.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('pago.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
@@ -54,16 +52,14 @@
                                 <div class="text-muted">
                                     Show
                                     <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="10" size="3"
-                                               aria-label="Invoices count">
+                                        <input type="text" class="form-control form-control-sm" value="10" size="3" aria-label="Invoices count">
                                     </div>
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
                                     Search:
                                     <div class="ms-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm"
-                                               aria-label="Search invoice">
+                                        <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
                                     </div>
                                 </div>
                             </div>
@@ -72,19 +68,15 @@
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
                                 <tr>
-                                    <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                           aria-label="Select all invoices"></th>
+                                    <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices"></th>
                                     <th class="w-1">No.
                                         <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="icon icon-sm text-dark icon-thick" width="24" height="24"
-                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                             stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm text-dark icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
-                                    
+
 										<th>Id Pago</th>
 										<th>Id Proyecto</th>
 										<th>Id Perfil</th>
@@ -104,10 +96,9 @@
                                 <tbody>
                                 @forelse ($pagos as $pago)
                                     <tr>
-                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select pago"></td>
+                                        <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select pago"></td>
                                         <td>{{ ++$i }}</td>
-                                        
+
 											<td>{{ $pago->id_pago }}</td>
 											<td>{{ $pago->id_proyecto }}</td>
 											<td>{{ $pago->id_perfil }}</td>
@@ -128,16 +119,14 @@
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('pagos.show',$pago->id) }}">
+                                                        <a class="dropdown-item"  href="{{ route('pago.show',$pago->id_pago) }}">
                                                             View
                                                         </a>
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('pagos.edit',$pago->id) }}">
+                                                        <a class="dropdown-item" href="{{ route('pago.edit',$pago->id_pago) }}">
                                                             Edit
                                                         </a>
                                                         <form
-                                                            action="{{ route('pagos.destroy',$pago->id) }}"
+                                                            action="{{ route('pago.destroy',$pago->id_pago) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -160,7 +149,7 @@
 
                             </table>
                         </div>
-                       <div class="card-footer d-flex align-items-center">
+                        <div class="card-footer d-flex align-items-center">
                             {!! $pagos->links('tablar::pagination') !!}
                         </div>
                     </div>

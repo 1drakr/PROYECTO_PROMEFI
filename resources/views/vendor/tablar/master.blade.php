@@ -20,6 +20,18 @@
     @endif
     {{-- Custom Stylesheets (post Tablar) --}}
     @yield('tablar_css')
+
+    @if (app()->environment('local'))
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        @if (file_exists(public_path('build/manifest.json')))
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @else
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+            <script src="{{ asset('js/app.js') }}" defer></script>
+        @endif
+    @endif
+
 </head>
 @yield('body')
 @include('tablar::extra.modal')

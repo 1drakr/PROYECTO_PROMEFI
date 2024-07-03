@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Historium;
+use App\Models\Historia;
 use Illuminate\Http\Request;
 
 /**
@@ -18,7 +18,7 @@ class HistoriumController extends Controller
      */
     public function index()
     {
-        $historia = Historium::paginate(10);
+        $historia = Historia::paginate(10);
 
         return view('historium.index', compact('historia'))
             ->with('i', (request()->input('page', 1) - 1) * $historia->perPage());
@@ -31,7 +31,7 @@ class HistoriumController extends Controller
      */
     public function create()
     {
-        $historium = new Historium();
+        $historium = new Historia();
         return view('historium.create', compact('historium'));
     }
 
@@ -43,9 +43,9 @@ class HistoriumController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Historium::$rules);
+        request()->validate(Historia::$rules);
 
-        $historium = Historium::create($request->all());
+        $historium = Historia::create($request->all());
 
         return redirect()->route('historia.index')
             ->with('success', 'Historium created successfully.');
@@ -59,7 +59,7 @@ class HistoriumController extends Controller
      */
     public function show($id)
     {
-        $historium = Historium::find($id);
+        $historium = Historia::find($id);
 
         return view('historium.show', compact('historium'));
     }
@@ -72,7 +72,7 @@ class HistoriumController extends Controller
      */
     public function edit($id)
     {
-        $historium = Historium::find($id);
+        $historium = Historia::find($id);
 
         return view('historium.edit', compact('historium'));
     }
@@ -84,9 +84,9 @@ class HistoriumController extends Controller
      * @param  Historium $historium
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Historium $historium)
+    public function update(Request $request, Historia $historium)
     {
-        request()->validate(Historium::$rules);
+        request()->validate(Historia::$rules);
 
         $historium->update($request->all());
 
@@ -101,7 +101,7 @@ class HistoriumController extends Controller
      */
     public function destroy($id)
     {
-        $historium = Historium::find($id)->delete();
+        $historium = Historia::find($id)->delete();
 
         return redirect()->route('historia.index')
             ->with('success', 'Historium deleted successfully');

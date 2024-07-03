@@ -19,7 +19,6 @@
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('recompensas.index') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -48,7 +47,7 @@
                             <h3 class="card-title">Recompensa Details</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('recompensas.store') }}" id="ajaxForm" role="form"
+                            <form method="POST" action="{{ route('recompensa.store') }}" id="ajaxForm" role="form"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @include('recompensa.form')

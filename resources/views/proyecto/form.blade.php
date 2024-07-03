@@ -1,5 +1,6 @@
 <h3 class="mb-4">Información del Proyecto</h3><hr>
-{{-- <div class="form-group mb-3">
+<div class="form-group mb-3">
+    @if(isset($proyecto->id_proyecto))
     <label class="form-label">   {{ Form::label('id_proyecto') }}</label>
     <div>
         {{ Form::text('id_proyecto', $proyecto->id_proyecto, ['class' => 'form-control' .
@@ -7,7 +8,8 @@
         {!! $errors->first('id_proyecto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>id_proyecto</b> instruction.</small>
     </div>
-</div> --}}
+    @endif
+</div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('titulo') }}</label>
     <div>

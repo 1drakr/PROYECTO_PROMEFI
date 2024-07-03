@@ -19,6 +19,8 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\FinalizacionproyectoController;
 use  App\Http\Controllers\ValidacionproyectoController;
 use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\ComentarioController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,6 +60,14 @@ Route::group(['middleware' => ['auth', 'role:Administrador']], function () {
     Route::resource('/pagopatrocinador', PagoPatrocinadorController::class);
     Route::resource('/pagocreador', PagoCreadorController::class);
     Route::resource('/estado', EstadoController::class);
+
+    // COMENTARIO
+    Route::resource('comentario', ComentarioController::class);
+    Route::get('comentario/{comentario}/respuesta', [ComentarioController::class, 'createResponse'])->name('respuesta.create');
+    Route::post('comentario/respuesta', [ComentarioController::class, 'storeResponse'])->name('respuesta.store');
+    Route::get('respuesta/{respuesta}/edit', [ComentarioController::class, 'editResponse'])->name('respuesta.edit');
+    Route::patch('respuesta/{respuesta}', [ComentarioController::class, 'updateResponse'])->name('respuesta.update');
+    Route::delete('respuesta/{respuesta}', [ComentarioController::class, 'destroyResponse'])->name('respuesta.destroy');
 });
 
 // Rutas accesibles por el rol Evaluador

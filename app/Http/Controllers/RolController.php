@@ -73,13 +73,4 @@ class RolController extends Controller
             ->with('success', 'Rol deleted successfully');
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->get('query');
-        $rols = Rol::where('id_rol', 'LIKE', "%{$query}%")
-                    ->orWhere('Nombre', 'LIKE', "%{$query}%")
-                    ->get();
-
-        return response()->json($rols);
-    }
 }

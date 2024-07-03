@@ -1,5 +1,6 @@
 
 <div class="form-group mb-3">
+    @if(isset($pago->id_pago))
     <label class="form-label">   {{ Form::label('id_pago') }}</label>
     <div>
         {{ Form::text('id_pago', $pago->id_pago, ['class' => 'form-control' .
@@ -7,8 +8,20 @@
         {!! $errors->first('id_pago', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pago <b>id_pago</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
+    @if(isset($recompensas->id_recompensa))
+    <label for="recompensa" class="form-label">Recompensa</label>
+    <select name="id_recompensa" class="form-control">
+        @foreach($recompensas as $recompensa)
+            <option value="{{ $recompensa->id_recompensa }}">{{ $recompensa->titulo }}</option>
+        @endforeach
+    </select>
+    @endif
+</div>
+<div class="form-group mb-3">
+    @if(isset($pago->id_proyecto))
     <label class="form-label">   {{ Form::label('id_proyecto') }}</label>
     <div>
         {{ Form::text('id_proyecto', $pago->id_proyecto, ['class' => 'form-control' .
@@ -16,8 +29,10 @@
         {!! $errors->first('id_proyecto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pago <b>id_proyecto</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
+    @if(isset($pago->id_perfil))
     <label class="form-label">   {{ Form::label('id_perfil') }}</label>
     <div>
         {{ Form::text('id_perfil', $pago->id_perfil, ['class' => 'form-control' .
@@ -25,6 +40,7 @@
         {!! $errors->first('id_perfil', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pago <b>id_perfil</b> instruction.</small>
     </div>
+    @endif
 </div>
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('nombre_legal') }}</label>
@@ -35,6 +51,7 @@
         <small class="form-hint">pago <b>nombre_legal</b> instruction.</small>
     </div>
 </div>
+
 <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('id_fiscal') }}</label>
     <div>
@@ -72,12 +89,9 @@
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('metodo_pago') }}</label>
+    <label class="form-label">{{ Form::label('metodo_pago', 'Método de Pago') }}</label>
     <div>
-        {{ Form::text('metodo_pago', $pago->metodo_pago, ['class' => 'form-control' .
-        ($errors->has('metodo_pago') ? ' is-invalid' : ''), 'placeholder' => 'Metodo Pago']) }}
-        {!! $errors->first('metodo_pago', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">pago <b>metodo_pago</b> instruction.</small>
+        {{ Form::select('metodo_pago', ['Tarjeta' => 'Tarjeta', 'Banca Movil' => 'Banca Movil'], null, ['class' => 'form-control']) }}
     </div>
 </div>
 <div class="form-group mb-3">
@@ -90,6 +104,7 @@
     </div>
 </div>
 <div class="form-group mb-3">
+    @if(isset($pago->monto))
     <label class="form-label">   {{ Form::label('monto') }}</label>
     <div>
         {{ Form::text('monto', $pago->monto, ['class' => 'form-control' .
@@ -97,6 +112,7 @@
         {!! $errors->first('monto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">pago <b>monto</b> instruction.</small>
     </div>
+    @endif
 </div>
 
     <div class="form-footer">

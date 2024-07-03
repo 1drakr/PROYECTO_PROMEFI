@@ -45,10 +45,14 @@ class SolicitudproyectoController extends Controller
     public function evaluar($id)
     {
         $solicitudproyecto = Solicitudproyecto::with(['proyecto.recompensas', 'proyecto.perfil','user','estado'])->find($id);
+
+        if (!$solicitudproyecto) {
+            abort(404);
+        }
+
         $usuariosEvaluadores = Perfil::whereHas('rol', function ($query) {
             $query->where('nombre', 'evaluador');
         })->get();
-        //dd($usuariosEvaluadores);
         return view('solicitudproyecto.evaluar', compact('solicitudproyecto', 'usuariosEvaluadores'));
     }
 
@@ -89,15 +93,15 @@ class SolicitudproyectoController extends Controller
 
         $solicitudproyecto->update($request->all());
 
-        return redirect()->route('solicitudproyectos.index')
+        return redirect()->route('solicitudproyecto.index')
             ->with('success', 'Solicitudproyecto updated successfully');
     }
 
-    public function destroy($id)
-    {
-        $solicitudproyecto = Solicitudproyecto::find($id)->delete();
+    // public function destroy($id)
+    // {
+    //     $solicitudproyecto = Solicitudproyecto::find($id)->delete();
 
-        return redirect()->route('solicitudproyectos.index')
-            ->with('success', 'Solicitudproyecto deleted successfully');
-    }
+    //     return redirect()->route('solicitudproyecto.index')
+    //         ->with('success', 'Solicitudproyecto deleted successfully');
+    // }
 }

@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Solicitudproyecto;
 use App\Models\Validacionproyecto;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Evaluarproyecto extends Model
 {
+    use HasFactory;
+
     protected $table = 'evaluarproyecto';
     protected $primaryKey = 'id_evaluarproy';
     static $rules = [

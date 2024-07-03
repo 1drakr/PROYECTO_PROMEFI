@@ -2,26 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Historium
- *
- * @property $id_historia
- * @property $id_proyecto
- * @property $titulo
- * @property $texto
- * @property $video
- * @property $imagen
- * @property $created_at
- * @property $updated_at
- *
- * @property Proyecto $proyecto
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
+
 class Historia extends Model
 {
+    use HasFactory;
     protected $table = 'historia';
     protected $primaryKey = 'id_historia';
 

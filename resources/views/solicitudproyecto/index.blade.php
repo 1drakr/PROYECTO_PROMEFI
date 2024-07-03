@@ -144,10 +144,10 @@
                                                            href="{{ route('solicitudproyecto.show',$solicitudproyecto->id_solicitudProy) }}">
                                                             Evaluar
                                                         </a>
-                                                        {{-- <a class="dropdown-item"
+                                                        <a class="dropdown-item"
                                                            href="{{ route('solicitudproyecto.edit',$solicitudproyecto->id_solicitudProy) }}">
                                                             Edit
-                                                        </a> --}}
+                                                        </a>
                                                         {{-- <form
                                                             action="{{ route('solicitudproyecto.destroy',$solicitudproyecto->id_solicitudProy) }}"
                                                             method="POST">

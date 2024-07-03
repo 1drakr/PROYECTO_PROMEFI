@@ -21,7 +21,7 @@
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('pago-creadors.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('pagocreador.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -84,7 +84,7 @@
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
-                                    
+
 										<th>Id Pago Creador</th>
 										<th>Id Proyecto</th>
 										<th>Id Perfil</th>
@@ -102,7 +102,7 @@
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select pagoCreador"></td>
                                         <td>{{ ++$i }}</td>
-                                        
+
 											<td>{{ $pagoCreador->id_pago_creador }}</td>
 											<td>{{ $pagoCreador->id_proyecto }}</td>
 											<td>{{ $pagoCreador->id_perfil }}</td>
@@ -119,15 +119,15 @@
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
-                                                           href="{{ route('pago-creadors.show',$pagoCreador->id) }}">
+                                                           href="{{ route('pagocreador.show',$pagoCreador->id) }}">
                                                             View
                                                         </a>
                                                         <a class="dropdown-item"
-                                                           href="{{ route('pago-creadors.edit',$pagoCreador->id) }}">
+                                                           href="{{ route('pagocreador.edit',$pagoCreador->id) }}">
                                                             Edit
                                                         </a>
                                                         <form
-                                                            action="{{ route('pago-creadors.destroy',$pagoCreador->id) }}"
+                                                            action="{{ route('pagocreador.destroy',$pagoCreador->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')

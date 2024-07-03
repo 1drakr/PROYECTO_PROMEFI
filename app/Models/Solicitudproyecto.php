@@ -7,9 +7,11 @@ use App\Models\User;
 use App\Models\Estado;
 use App\Models\Proyecto;
 use App\Models\Evaluarproyecto;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Solicitudproyecto extends Model
 {
+    use HasFactory;
     protected $table = 'solicitudproyecto';
     protected $primaryKey = 'id_solicitudProy';
     static $rules = [
