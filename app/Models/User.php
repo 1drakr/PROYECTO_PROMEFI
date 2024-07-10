@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
     public function perfil()
     {
-        return $this->hasOne(Perfil::class, 'id_users', 'id');
+        return $this->hasOne(Perfil::class, 'id_users');
     }
     public function assignRole($roleName)
     {

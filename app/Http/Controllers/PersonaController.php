@@ -11,11 +11,6 @@ use Illuminate\Http\Request;
  */
 class PersonaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $personas = Persona::paginate(10);
@@ -24,23 +19,12 @@ class PersonaController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $personas->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $persona = new Persona();
         return view('persona.create', compact('persona'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(Persona::$rules);
@@ -51,12 +35,6 @@ class PersonaController extends Controller
             ->with('success', 'Persona created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $persona = Persona::find($id);
@@ -64,12 +42,6 @@ class PersonaController extends Controller
         return view('persona.show', compact('persona'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $persona = Persona::find($id);
@@ -77,13 +49,6 @@ class PersonaController extends Controller
         return view('persona.edit', compact('persona'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Persona $persona
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Persona $persona)
     {
         request()->validate(Persona::$rules);

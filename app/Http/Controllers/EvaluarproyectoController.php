@@ -3,17 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evaluarproyecto;
+use App\Models\Proyecto;
 use App\Models\SolicitudProyecto;
 use App\Models\ValidacionProyecto;
+
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluarproyectoController extends Controller
 {
     public function index(Request $request)
     {
-        $evaluarproyectos = Evaluarproyecto::paginate(10);
+        $user = Auth::user();
+        $perfil = $user->perfil;
+
+        if ($perfil->rol->Nombre === 'Administrador') {
+            // Los administradores pueden ver todos los proyectos evaluados
+            $evaluarproyectos = Evaluarproyecto::paginate(10);
+        } else {
+            // Otros usuarios solo pueden ver sus propios proyectos evaluados
+            $evaluarproyectos = Evaluarproyecto::where('id_evauser', $perfil->id_perfil)->paginate(10);
+        }
 
         return view('evaluarproyecto.index', compact('evaluarproyectos'))
             ->with('i', (request()->input('page', 1) - 1) * $evaluarproyectos->perPage());
@@ -53,11 +67,14 @@ class EvaluarproyectoController extends Controller
             'documento_validacion' => 'file|mimes:pdf,doc,docx|max:10240',
         ]);
 
+
         $evaluarproyecto = Evaluarproyecto::findOrFail($id);
+        $solicitudproyecto = Solicitudproyecto::findOrFail($evaluarproyecto->id_solicitud);
 
         // Asignar automáticamente id_perfil e id_estado
         $user = auth()->user();
         $perfil = $user->perfil;
+
 
         if (!$perfil) {
             // Si no se encuentra el perfil, registrar un error
@@ -67,7 +84,6 @@ class EvaluarproyectoController extends Controller
         }
 
         $id_perfil = $perfil->id_perfil;
-        $id_estado = 3;
 
         if ($request->hasFile('documento_proyecto')) {
             $documentoProyectoPath = $request->file('documento_proyecto')->store('documentos_proyecto', 'public');
@@ -80,12 +96,25 @@ class EvaluarproyectoController extends Controller
         }
 
         $evaluarproyecto->update($request->except(['documento_proyecto', 'documento_evaluacion', 'documento_validacion']));
-        $validacionProyecto = new ValidacionProyecto();
-        $validacionProyecto->id_evaluacionproy = $evaluarproyecto->id_evaluarproy;
-        $validacionProyecto->documento_validacion = null;
-        $validacionProyecto->id_perfil = $id_perfil;
-        $validacionProyecto->id_estado = $id_estado;
-        $validacionProyecto->save();
+
+        // Verificar si ya existe una entrada en ValidacionProyecto con el mismo id_evaluacionproy
+        $validacionProyecto = ValidacionProyecto::where('id_evaluacionproy', $evaluarproyecto->id_evaluarproy)->first();
+
+        if ($validacionProyecto) {
+            // Si existe, actualizar la entrada existente
+            $validacionProyecto->id_perfil = $id_perfil;
+            $validacionProyecto->id_estado = $request->input('id_estado');
+            $validacionProyecto->documento_validacion = null;
+            $validacionProyecto->save();
+        } else {
+            // Si no existe, crear una nueva entrada
+            $validacionProyecto = new ValidacionProyecto();
+            $validacionProyecto->id_evaluacionproy = $evaluarproyecto->id_evaluarproy;
+            $validacionProyecto->id_perfil = $id_perfil;
+            $validacionProyecto->id_estado = $request->input('id_estado');
+            $validacionProyecto->documento_validacion = null;
+            $validacionProyecto->save();
+        }
 
         return redirect()->route('evaluarproyecto.index')
             ->with('success', 'La Evaluacion se envio a Validacion');
@@ -150,6 +179,12 @@ class EvaluarproyectoController extends Controller
         $evaluarproyecto->puntuacion = $request->input('puntuacion');
         $evaluarproyecto->id_estado = $request->input('id_estado');
         $evaluarproyecto->save();
+
+        // Actualizar el estado del proyecto
+        $proyecto = Proyecto::findOrFail($evaluarproyecto->id_proyecto);
+        $proyecto->id_estado = $request->input('id_estado');
+        dd($proyecto);
+        $proyecto->save();
 
         return redirect()->route('evaluarproyecto.show', $id)->with('success', 'Evaluación enviada correctamente');
     }

@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'Update Proyecto')
+@section('title', 'Create Perfil')
 
 @section('content')
     <!-- Page header -->
@@ -10,16 +10,16 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Update
+                        Create
                     </div>
                     <h2 class="page-title">
-                        {{ __('Proyecto ') }}
+                        {{ __('Perfil ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('proyecto.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('perfil.index') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Proyecto List
+                            Perfil List
                         </a>
                     </div>
                 </div>
@@ -45,15 +45,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Proyecto Details</h3>
+                            <h3 class="card-title">Perfil Details</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST"
-                                  action="{{ route('proyecto.update', $proyecto->id_proyecto) }}" id="ajaxForm" role="form"
-                                  enctype="multipart/form-data">
-                                {{ method_field('PATCH') }}
+                            <form method="POST" action="{{ route('perfil.asignarRol', $perfil->id_perfil) }}">
                                 @csrf
-                                @include('proyecto.form')
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" name="Nombre" value="{{ $perfil->Nombre }}" class="form-control" disabled>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Apellido</label>
+                                    <input type="text" name="Apellido" value="{{ $perfil->Apellido }}" class="form-control" disabled>
+                                </div>
+
+                                <!-- Dropdown para seleccionar el rol -->
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Rol</label>
+                                    <select name="id_rol" class="form-control">
+                                        @foreach($roles as $id => $nombre)
+                                            <option value="{{ $id }}" {{ $perfil->id_rol == $id ? 'selected' : '' }}>{{ $nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary">Asignar Rol</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -62,6 +81,4 @@
         </div>
     </div>
 @endsection
-
-
 

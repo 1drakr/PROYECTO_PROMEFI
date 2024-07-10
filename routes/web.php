@@ -24,6 +24,7 @@ use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\PredictionController;
 use Illuminate\Support\Facades\Auth;
+use Termwind\Components\Dd;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +37,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth', 'role:Administrador']], function () {
     Route::resource('/rol', RolController::class);
     Route::get('/rol/search', [RolController::class, 'search'])->name('rol.search');
+
     Route::resource('/perfil', PerfilController::class);
+    Route::get('perfil/asignarRolForm/{id}', [PerfilController::class, 'asignarRolForm'])->name('perfil.asignarRolForm');
+    Route::post('perfil/asignarRol/{id}', [PerfilController::class, 'asignarRol'])->name('perfil.asignarRol');
+
     Route::resource('/proyecto', ProyectoController::class);
     Route::post('proyecto/{id}/finalizar', [ProyectoController::class, 'finalizar'])->name('proyecto.finalizar');
     Route::resource('/recompensa', RecompensaController::class);
@@ -86,16 +91,13 @@ Route::group(['middleware' => ['auth', 'role:Evaluador']], function () {
     Route::get('evaluarproyecto/{id}/generate-evaluation', [ProjectEvaluationController::class, 'generateEvaluationReport'])->name('evaluarproyecto.generate-evaluation');
 });
 
-// Rutas accesibles por el rol Creador
-Route::group(['middleware' => ['auth', 'role:Creador']], function () {
+// Rutas accesibles por el rol Creador y  Usuario
+Route::group(['middleware' => ['auth', 'role:Creador|Usuario']], function () {
     Route::resource('/proyecto', ProyectoController::class);
-    Route::get('/solicitudproyecto/evaluar/{id}', [SolicitudproyectoController::class, 'evaluar'])->name('solicitudproyecto.evaluar');
+    Route::resource('/recompensa', RecompensaController::class);
+    Route::resource('/pago', PagoController::class); // Ruta para pagos
 });
 
-// Rutas accesibles por el rol Usuario
-Route::group(['middleware' => ['auth', 'role:Usuario']], function () {
-    Route::resource('/proyecto', ProyectoController::class);Route::resource('/proyecto', ProyectoController::class);
-});
 
 // Rutas accesibles por el rol Donador
 Route::group(['middleware' => ['auth', 'role:Donador']], function () {

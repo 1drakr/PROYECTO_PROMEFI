@@ -121,7 +121,7 @@
 											<td>{{ $perfil->ZonaHoraria }}</td>
 											<td>{{ $perfil->UrlPerso }}</td>
 											<td>{{ $perfil->SitioWeb }}</td>
-											<td>{{ $perfil->id_rol }}</td>
+											<td>{{ $perfil->rol->Nombre }}</td>
 											<td>{{ $perfil->Estado }}</td>
 
                                         <td>
@@ -140,6 +140,10 @@
                                                            href="{{ route('perfil.edit',$perfil->id_perfil) }}">
                                                             Editar
                                                         </a>
+                                                        <a class="dropdown-item"
+                                                           href="{{ route('perfil.asignarRolForm',$perfil->id_perfil) }}">
+                                                            Asignar nuevo rol
+                                                        </a>
                                                         <form
                                                             action="{{ route('perfil.destroy',$perfil->id_perfil) }}"
                                                             method="POST">
@@ -149,7 +153,7 @@
                                                                     onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
-                                                                Cambiar estado
+                                                                Eliminar
                                                             </button>
                                                         </form>
                                                     </div>

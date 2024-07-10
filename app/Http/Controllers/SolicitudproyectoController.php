@@ -63,13 +63,26 @@ class SolicitudproyectoController extends Controller
             'id_perfil' => 'required|exists:perfil,id_perfil',
         ]);
 
-        Evaluarproyecto::create([
-            'id_solicitud' => $id,
-            'id_evauser' => $request->id_perfil,
-            'documento_proyecto' => "null",
-            'documento_evaluacion' => "null",
-            'id_estado' => 2,
-        ]);
+        // Verificar si ya existe una evaluación con el mismo id_solicitud
+        $evaluarproyecto = Evaluarproyecto::where('id_solicitud', $id)->first();
+
+        if ($evaluarproyecto) {
+            // Si existe, actualizar la entrada existente
+            $evaluarproyecto->id_evauser = $request->id_perfil;
+            $evaluarproyecto->documento_proyecto = "null";
+            $evaluarproyecto->documento_evaluacion = "null";
+            $evaluarproyecto->id_estado = 2;
+            $evaluarproyecto->save();
+        } else {
+            // Si no existe, crear una nueva entrada
+            Evaluarproyecto::create([
+                'id_solicitud' => $id,
+                'id_evauser' => $request->id_perfil,
+                'documento_proyecto' => "null",
+                'documento_evaluacion' => "null",
+                'id_estado' => 2,
+            ]);
+        }
 
         // Cambiar el estado de la solicitud del proyecto a 8
         $solicitudproyecto = Solicitudproyecto::find($id);

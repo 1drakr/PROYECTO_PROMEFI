@@ -35,13 +35,9 @@ class Perfil extends Model
         return $this->hasMany('App\Models\Redessociale', 'id_perfil_amigo', 'id_perfil');
     }
 
-    public function rol()
+    public function proyectos()
     {
-        return $this->hasOne('App\Models\Rol', 'id_rol', 'id_rol');
-    }
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'id_users');
+        return $this->hasMany(Proyecto::class, 'id_perfil');
     }
 
     public function usuariopagos()
@@ -49,5 +45,14 @@ class Perfil extends Model
         return $this->hasMany('App\Models\Usuariopago', 'id_perfil', 'id_perfil');
     }
 
+    public function rol()
+    {
+        return $this->belongsTo('App\Models\Rol', 'id_rol', 'id_rol');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'id_users', 'id');
+    }
 
 }

@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perfil;
+use App\Models\Rol;
+
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
     public function index()
     {
-        $perfils = Perfil::paginate(10);
-
+        $perfils = Perfil::with('rol')->paginate(10);
         return view('perfil.index', compact('perfils'))
             ->with('i', (request()->input('page', 1) - 1) * $perfils->perPage());
     }
@@ -62,5 +63,23 @@ class PerfilController extends Controller
 
         return redirect()->route('perfils.index')
             ->with('success', 'Perfil deleted successfully');
+    }
+
+    public function asignarRolForm($id)
+    {
+        $perfil = Perfil::findOrFail($id);
+        $roles = Rol::pluck('nombre', 'id_rol'); // Obtener los roles disponibles
+
+        return view('perfil.asignar_rol', compact('perfil', 'roles'));
+    }
+
+    public function asignarRol(Request $request, $id)
+    {
+        $perfil = Perfil::findOrFail($id);
+        $perfil->id_rol = $request->input('id_rol');
+        $perfil->save();
+
+        return redirect()->route('perfil.index')
+            ->with('success', 'Rol asignado exitosamente');
     }
 }

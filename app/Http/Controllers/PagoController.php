@@ -19,28 +19,28 @@ class PagoController extends Controller
         return view('pago.index', compact('pagos'))
             ->with('i', (request()->input('page', 1) - 1) * $pagos->perPage());
     }
-    public function create()
+    public function create(Request $request)
     {
-        $pago = new Pago();
-        $proyectos = Proyecto::all();
-        $recompensas = Recompensa::all();
+        $pagos = new Pago();
+        $proyectoId = $request->input('proyecto_id');
+        $proyecto = Proyecto::findOrFail($proyectoId);
+        //$recompensas = Recompensa::where('id_proyecto', $proyectoId)->first();
+        $recompensas = Recompensa::where('id_proyecto', $proyectoId)->get();
 
-        return view('pago.create', compact('proyectos', 'recompensas', 'pago'));
+        return view('pago.create', compact('pagos','proyecto', 'recompensas'));
     }
 
     public function store(Request $request)
     {
         $perfil = Auth::user()->perfil;
+        $recompensa = Recompensa::find($request->id_recompensa);
 
-        if ($request->tipo_pago == 'tarjeta') {
-            $recompensa = Recompensa::find($request->id_recompensa);
+        if ($recompensa->cantidad > 0) {
+            $recompensa->cantidad -= 1;
+            $recompensa->save();
 
-            if ($recompensa->cantidad > 0) {
-                $recompensa->cantidad -= 1;
-                $recompensa->save();
-
-                $pago = Pago::create([
-                    'id_proyecto' => $request->id_proyecto,
+            $pago = Pago::create([
+                'id_proyecto' => $request->id_proyecto,
                     'id_perfil' => $perfil->id_perfil,
                     'nombre_legal' => $request->nombre_legal,
                     'id_fiscal' => $request->id_fiscal,
@@ -49,39 +49,13 @@ class PagoController extends Controller
                     'telefono' => $request->telefono,
                     'metodo_pago' => $request->metodo_pago,
                     'cuenta_bancaria' => $request->cuenta_bancaria,
-                    'monto' => $recompensa->monto,
-                ]);
-
-                PagoCreador::create([
-                    'id_proyecto' => $request->id_proyecto,
-                    'id_perfil' => $perfil->id_perfil,
-                    'monto' => $recompensa->monto,
-                    'metodo_pago' => $request->metodo_pago,
-                    'cuenta_bancaria' => $request->cuenta_bancaria,
-                ]);
-
-                return redirect()->route('pagos.index')->with('success', 'Pago realizado exitosamente.');
-            } else {
-                return redirect()->back()->with('error', 'Recompensa sin stock.');
-            }
-        } elseif ($request->tipo_pago == 'banca_movil') {
-            $pagoPatrocinador = PagoPatrocinador::create([
-                'id_proyecto' => $request->id_proyecto,
-                'id_perfil' => $perfil->id_perfil,
-                'monto' => $request->monto,
-                'metodo_pago' => $request->metodo_pago,
-                'cuenta_bancaria' => $request->cuenta_bancaria,
+                    'monto' => $request->monto,
             ]);
 
-            PagoCreador::create([
-                'id_proyecto' => $request->id_proyecto,
-                'id_perfil' => $perfil->id_perfil,
-                'monto' => $request->monto,
-                'metodo_pago' => $request->metodo_pago,
-                'cuenta_bancaria' => $request->cuenta_bancaria,
-            ]);
 
-            return redirect()->route('pagos.index')->with('success', 'Pago realizado exitosamente.');
+            return redirect()->route('home')->with('success', 'Pago realizado exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'Recompensa sin stock.');
         }
     }
     public function show($id)
@@ -93,9 +67,11 @@ class PagoController extends Controller
 
     public function edit($id)
     {
-        $pago = Pago::find($id);
 
-        return view('pago.edit', compact('pago'));
+        $pagos = Pago::find($id);
+        $proyecto = Proyecto::findOrFail($pagos->id_proyecto);
+        $recompensas = Recompensa::where('id_proyecto', $pagos->id_proyecto)->get();
+        return view('pago.edit', compact('pagos','proyecto', 'recompensas'));
     }
 
     public function update(Request $request, Pago $pago)

@@ -16,9 +16,19 @@ class ProyectoController extends Controller
 
     public function index()
     {
-        // Cargar los datos relacionados
-        $proyectos = Proyecto::with(['recompensas', 'historias', 'perfil.user','estado'])->paginate(10);
-        //dd($proyectos);
+        $user = auth()->user();
+        $perfil = $user->perfil;
+
+        if ($perfil->rol->Nombre === 'Administrador') {
+            // Los administradores pueden ver todos los proyectos
+            $proyectos = Proyecto::with(['recompensas', 'historias', 'perfil.user', 'estado'])->paginate(10);
+        } else {
+            // Otros usuarios solo pueden ver sus propios proyectos
+            $proyectos = Proyecto::whereHas('perfil', function($query) use ($user) {
+                $query->where('id_users', $user->id);
+            })->with(['recompensas', 'historias', 'perfil.user', 'estado'])->paginate(10);
+        }
+
         return view('proyecto.index', compact('proyectos'))
             ->with('i', (request()->input('page', 1) - 1) * $proyectos->perPage());
     }

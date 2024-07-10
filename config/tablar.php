@@ -164,7 +164,7 @@ return [
                     'icon' => 'ti ti-list',
                 ],
                 [
-                    'text' => 'Asignar Rol',
+                    'text' => 'Rol',
                     'url' => '/rol',
                     'icon' => 'ti ti-list',
                 ],

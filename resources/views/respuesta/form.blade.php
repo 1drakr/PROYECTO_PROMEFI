@@ -18,6 +18,7 @@
     <label class="form-label">{{ Form::label('usuario') }}</label>
     <div>
         {{ Form::text('usuario', $perfil->Nombre." ".$perfil->Apellido, ['class' => 'form-control', 'readonly' => 'readonly']) }}
+        {{ Form::hidden('id_perfil', $perfil->id_perfil) }}
     </div>
 </div>
 <div class="form-group mb-3">

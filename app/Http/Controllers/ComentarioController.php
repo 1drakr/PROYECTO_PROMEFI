@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Comentario;
 use App\Models\Perfil;
+use App\Models\Proyecto;
 use App\Models\RespuestaComentario;
+
+
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,17 +27,17 @@ class ComentarioController extends Controller
     {
         $comentario = new Comentario();
         $perfil = Perfil::where('id_users', Auth::id())->first();
-        return view('comentario.create', compact('comentario', 'perfil'));
+        $proyectos = Proyecto::all();
+        return view('comentario.create', compact('comentario', 'perfil', 'proyectos'));
     }
 
     public function store(Request $request)
     {
         request()->validate(Comentario::$rules);
 
-        $perfil = Perfil::where('id_users', Auth::id())->first();
         $comentario = Comentario::create([
             'id_proyecto' => $request->id_proyecto,
-            'id_perfil' => $perfil->id_perfil,
+            'id_perfil' => $request->id_perfil,
             'contenido' => $request->contenido,
         ]);
 
@@ -51,7 +56,8 @@ class ComentarioController extends Controller
     {
         $comentario = Comentario::find($id);
         $perfil = Perfil::where('id_users', Auth::id())->first();
-        return view('comentario.edit', compact('comentario', 'perfil'));
+        $proyectos = Proyecto::all();
+        return view('comentario.edit', compact('comentario', 'perfil','proyectos'));
     }
 
     public function update(Request $request, $id)
@@ -61,7 +67,7 @@ class ComentarioController extends Controller
         $comentario = Comentario::find($id);
         $comentario->update($request->all());
 
-        return redirect()->route('comentarios.index')
+        return redirect()->route('comentario.index')
             ->with('success', 'Comentario actualizado exitosamente.');
     }
 
@@ -100,7 +106,7 @@ class ComentarioController extends Controller
     {
         $respuesta = RespuestaComentario::find($id);
         $perfil = Perfil::where('id_users', Auth::id())->first();
-        return view('respuesta.edit', compact('respuesta', 'perfil'));
+        return view('respuesta.edit_response', compact('respuesta', 'perfil'));
     }
 
     public function updateResponse(Request $request, $id)
@@ -110,7 +116,7 @@ class ComentarioController extends Controller
         $respuesta = RespuestaComentario::find($id);
         $respuesta->update($request->all());
 
-        return redirect()->route('comentarios.index')
+        return redirect()->route('comentario.index')
             ->with('success', 'Respuesta actualizada exitosamente.');
     }
 
@@ -119,7 +125,7 @@ class ComentarioController extends Controller
         $respuesta = RespuestaComentario::find($id);
         $respuesta->delete();
 
-        return redirect()->route('comentarios.index')
+        return redirect()->route('comentario.index')
             ->with('success', 'Respuesta eliminada exitosamente.');
     }
 
