@@ -32,6 +32,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('perfils/edit', [PerfilController::class, 'editUsuario'])->name('perfils.edit');
+Route::patch('perfils/{perfil}', [PerfilController::class, 'updateUsuario'])->name('perfils.update');
 
 // Rutas accesibles por el rol Administrador
 Route::group(['middleware' => ['auth', 'role:Administrador']], function () {

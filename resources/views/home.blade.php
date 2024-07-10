@@ -17,14 +17,9 @@
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                  <span class="d-none d-sm-inline">
-                    <a href="#" class="btn btn-white">
-                      New view
-                    </a>
-                  </span>
+                        <a href="#" class="btn btn-white">New view</a>
                         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
                            data-bs-target="#modal-report">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">
@@ -36,7 +31,6 @@
                         </a>
                         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                            data-bs-target="#modal-report" aria-label="Create new report">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">
@@ -66,23 +60,35 @@
                             <h3 class="card-title">Lista de Proyectos</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
-                            <div class="d-flex">
-                                <div class="text-muted">
-                                    Show
-                                    <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="8" size="3"
-                                               aria-label="Invoices count">
+                            <form action="{{ route('home') }}" method="GET">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="titulo" class="form-label">Título</label>
+                                        <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Buscar por título" value="{{ request('titulo') }}">
                                     </div>
-                                    entries
-                                </div>
-                                <div class="ms-auto text-muted">
-                                    Search:
-                                    <div class="ms-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm"
-                                               aria-label="Search invoice">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="categoria" class="form-label">Categoría</label>
+                                        <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Buscar por categoría" value="{{ request('categoria') }}">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="ubicacion" class="form-label">Ubicación</label>
+                                        <input type="text" name="ubicacion" id="ubicacion" class="form-control" placeholder="Buscar por ubicación" value="{{ request('ubicacion') }}">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                                        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" value="{{ request('fecha_inicio') }}">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="fecha_termino" class="form-label">Fecha Término</label>
+                                        <input type="date" name="fecha_termino" id="fecha_termino" class="form-control" value="{{ request('fecha_termino') }}">
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable">
@@ -96,32 +102,30 @@
                                             </svg>
                                         </th>
                                         <th>Id Proyecto</th>
-                                        <th>Titulo</th>
-                                        <th>Subtitulo</th>
-                                        <th>Categoria Principal</th>
-                                        <th>Categoria</th>
-                                        <th>Subcategoria</th>
-                                        <th>Ubicacion</th>
-                                        <th>Fecha Limite</th>
-                                        <th>Duracion Campaña</th>
+                                        <th>Título</th>
+                                        <th>Subtítulo</th>
+                                        <th>Categoría Principal</th>
+                                        <th>Categoría</th>
+                                        <th>Subcategoría</th>
+                                        <th>Ubicación</th>
+                                        <th>Fecha Límite</th>
+                                        <th>Duración Campaña</th>
                                         <th>Monto Meta</th>
-                                        <th>Riesgos Desafios</th>
+                                        <th>Riesgos Desafíos</th>
                                         <th>Tipo Proyecto</th>
                                         <th>Pago</th>
                                         <th>Estado</th>
                                         <th>Completado</th>
                                         <th>Perfil Nombre</th>
                                         <th>Perfil Apellido</th>
-                                        <th>Perfil Ubicacion</th>
+                                        <th>Perfil Ubicación</th>
                                         <th>Perfil Zona Horaria</th>
                                         <th>User Name</th>
                                         <th>User Email</th>
                                         <th>Acciones</th>
                                     </tr>
-                                    </thead>
-
-                                    <tbody>
-
+                                </thead>
+                                <tbody>
                                     @forelse ($proyectos as $proyecto)
                                         <tr class="{{ $proyecto->ha_pasado_fecha_limite ? 'bg-warning' : '' }}">
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select proyecto"></td>
@@ -163,12 +167,13 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                        </tr>
                                     @empty
                                         <tr>
                                             <td colspan="24">No Data Found</td>
                                         </tr>
                                     @endforelse
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                         <div class="card-footer d-flex align-items-center">

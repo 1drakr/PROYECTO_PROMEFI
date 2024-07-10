@@ -6,6 +6,7 @@ use App\Models\Perfil;
 use App\Models\Rol;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PerfilController extends Controller
 {
@@ -79,7 +80,54 @@ class PerfilController extends Controller
         $perfil->id_rol = $request->input('id_rol');
         $perfil->save();
 
-        return redirect()->route('perfil.index')
+        return redirect()->route('perfils.edit')
             ->with('success', 'Rol asignado exitosamente');
     }
+
+    public function editUsuario()
+    {
+        $user = Auth::user();
+        $perfil = $user->perfil;
+
+        return view('perfil.perfils.edit', compact('perfil', 'user'));
+    }
+
+    public function updateUsuario(Request $request, Perfil $perfil)
+    {
+        $request->validate(array_merge(Perfil::$rules, [
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]));
+
+        // Manejo de la subida de la imagen
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+            $perfil->Avatar = $avatarPath;
+        }
+
+        // Actualizar otros campos del perfil
+        $perfil->update($request->except('avatar'));
+
+        // Actualizar los campos del usuario
+        $perfil->user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect()->route('home')
+            ->with('success', 'Perfil updated successfully');
+    }
+
+
+    // public function updateUsuario(Request $request, Perfil $perfil)
+    // {
+
+
+    //     request()->validate(Perfil::$rules);
+
+    //     $perfil->update($request->all());
+
+    //     return redirect()->route('perfils.index')
+    //         ->with('success', 'Perfil updated successfully');
+    // }
 }
