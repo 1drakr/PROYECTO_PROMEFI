@@ -56,13 +56,12 @@ Route::group(['middleware' => ['auth', 'role:Administrador']], function () {
     Route::resource('/solicitudproyecto', SolicitudproyectoController::class);
     Route::post('/solicitudproyecto/storeEvaluacion/{id}', [SolicitudproyectoController::class, 'storeEvaluacion'])->name('solicitudproyecto.storeEvaluacion');
     Route::get('/solicitudproyecto/evaluar/{id}', [SolicitudproyectoController::class, 'evaluar'])->name('solicitudproyecto.evaluar');
-    Route::get('/evaluarproyecto/{id}/generate-evaluation-report', [ProjectEvaluationController::class, 'generateEvaluationReport'])->name('evaluarproyecto.generateEvaluationReport');
+
     Route::resource('/evaluarproyecto', EvaluarproyectoController::class);
     Route::get('evaluarproyecto/{id}/download', [EvaluarproyectoController::class, 'downloadProjectDocument'])->name('evaluarproyecto.download');
     Route::get('evaluarproyecto/{id}/evaluate', [EvaluarproyectoController::class, 'evaluate'])->name('evaluarproyecto.evaluate');
     Route::post('evaluarproyecto/{id}/storeEvaluation', [EvaluarproyectoController::class, 'storeEvaluation'])->name('evaluarproyecto.storeEvaluation');
     Route::get('/evaluarproyecto/search', [EvaluarproyectoController::class, 'search'])->name('evaluarproyecto.search');
-    Route::get('evaluarproyecto/{id}/generate-evaluation', [ProjectEvaluationController::class, 'generateEvaluationReport'])->name('evaluarproyecto.generate-evaluation');
     Route::resource('/validacionproyecto', ValidacionproyectoController::class);
     Route::resource('/finalizacionproyecto', FinalizacionproyectoController::class);
     Route::get('finalizacionproyecto/{id}/apelacion', [FinalizacionproyectoController::class, 'apelacion'])->name('finalizacionproyecto.apelacion');
@@ -89,7 +88,6 @@ Route::group(['middleware' => ['auth', 'role:Evaluador']], function () {
     Route::get('evaluarproyecto/{id}/evaluate', [EvaluarproyectoController::class, 'evaluate'])->name('evaluarproyecto.evaluate');
     Route::post('evaluarproyecto/{id}/storeEvaluation', [EvaluarproyectoController::class, 'storeEvaluation'])->name('evaluarproyecto.storeEvaluation');
     Route::get('/evaluarproyecto/search', [EvaluarproyectoController::class, 'search'])->name('evaluarproyecto.search');
-    Route::get('evaluarproyecto/{id}/generate-evaluation', [ProjectEvaluationController::class, 'generateEvaluationReport'])->name('evaluarproyecto.generate-evaluation');
 });
 
 // Rutas accesibles por el rol Creador y  Usuario

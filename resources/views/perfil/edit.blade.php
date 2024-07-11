@@ -48,9 +48,7 @@
                             <h3 class="card-title">Perfil Details</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST"
-                                  action="{{ route('perfil.update', $perfil->id_perfil) }}" id="ajaxForm" role="form"
-                                  enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('perfil.update', $perfil->id_perfil) }}" id="ajaxForm" role="form" enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}
                                 @csrf
                                 @include('perfil.form',['perfil' => $perfil])
