@@ -1,134 +1,104 @@
 <h3 class="mb-4">Información del Proyecto</h3><hr>
 <div class="form-group mb-3">
     @if(isset($proyecto->id_proyecto))
-    <label class="form-label">   {{ Form::label('id_proyecto') }}</label>
+    <label class="form-label" for="id_proyecto">Id Proyecto</label>
     <div>
-        {{ Form::text('id_proyecto', $proyecto->id_proyecto, ['class' => 'form-control' .
-        ($errors->has('id_proyecto') ? ' is-invalid' : ''), 'placeholder' => 'Id Proyecto']) }}
+        <input type="text" name="id_proyecto" id="id_proyecto" class="form-control{{ $errors->has('id_proyecto') ? ' is-invalid' : '' }}" value="{{ old('id_proyecto', $proyecto->id_proyecto) }}" placeholder="Id Proyecto">
         {!! $errors->first('id_proyecto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>id_proyecto</b> instruction.</small>
     </div>
     @endif
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('titulo') }}</label>
+    <label class="form-label" for="titulo">Titulo</label>
     <div>
-        {{ Form::text('titulo', $proyecto->titulo, ['class' => 'form-control' .
-        ($errors->has('titulo') ? ' is-invalid' : ''), 'placeholder' => 'Titulo']) }}
+        <input type="text" name="titulo" id="titulo" class="form-control{{ $errors->has('titulo') ? ' is-invalid' : '' }}" value="{{ old('titulo', $proyecto->titulo) }}" placeholder="Titulo">
         {!! $errors->first('titulo', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>titulo</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('subtitulo') }}</label>
+    <label class="form-label" for="subtitulo">Subtitulo</label>
     <div>
-        {{ Form::text('subtitulo', $proyecto->subtitulo, ['class' => 'form-control' .
-        ($errors->has('subtitulo') ? ' is-invalid' : ''), 'placeholder' => 'Subtitulo']) }}
+        <input type="text" name="subtitulo" id="subtitulo" class="form-control{{ $errors->has('subtitulo') ? ' is-invalid' : '' }}" value="{{ old('subtitulo', $proyecto->subtitulo) }}" placeholder="Subtitulo">
         {!! $errors->first('subtitulo', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>subtitulo</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('categoria_principal') }}</label>
+    <label class="form-label" for="categoria_principal">Categoria Principal</label>
     <div>
-        {{ Form::text('categoria_principal', $proyecto->categoria_principal, ['class' => 'form-control' .
-        ($errors->has('categoria_principal') ? ' is-invalid' : ''), 'placeholder' => 'Categoria Principal']) }}
+        <input type="text" name="categoria_principal" id="categoria_principal" class="form-control{{ $errors->has('categoria_principal') ? ' is-invalid' : '' }}" value="{{ old('categoria_principal', $proyecto->categoria_principal) }}" placeholder="Categoria Principal">
         {!! $errors->first('categoria_principal', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>categoria_principal</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('categoria') }}</label>
+    <label class="form-label" for="categoria">Categoria</label>
     <div>
-        {{ Form::text('categoria', $proyecto->categoria, ['class' => 'form-control' .
-        ($errors->has('categoria') ? ' is-invalid' : ''), 'placeholder' => 'Categoria']) }}
+        <input type="text" name="categoria" id="categoria" class="form-control{{ $errors->has('categoria') ? ' is-invalid' : '' }}" value="{{ old('categoria', $proyecto->categoria) }}" placeholder="Categoria">
         {!! $errors->first('categoria', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>categoria</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('subcategoria') }}</label>
+    <label class="form-label" for="subcategoria">Subcategoria</label>
     <div>
-        {{ Form::text('subcategoria', $proyecto->subcategoria, ['class' => 'form-control' .
-        ($errors->has('subcategoria') ? ' is-invalid' : ''), 'placeholder' => 'Subcategoria']) }}
+        <input type="text" name="subcategoria" id="subcategoria" class="form-control{{ $errors->has('subcategoria') ? ' is-invalid' : '' }}" value="{{ old('subcategoria', $proyecto->subcategoria) }}" placeholder="Subcategoria">
         {!! $errors->first('subcategoria', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>subcategoria</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('ubicacion') }}</label>
+    <label class="form-label" for="ubicacion">Ubicacion</label>
     <div>
-        {{ Form::text('ubicacion', $proyecto->ubicacion, ['class' => 'form-control' .
-        ($errors->has('ubicacion') ? ' is-invalid' : ''), 'placeholder' => 'Ubicacion']) }}
+        <input type="text" name="ubicacion" id="ubicacion" class="form-control{{ $errors->has('ubicacion') ? ' is-invalid' : '' }}" value="{{ old('ubicacion', $proyecto->ubicacion) }}" placeholder="Ubicacion">
         {!! $errors->first('ubicacion', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>ubicacion</b> instruction.</small>
     </div>
 </div>
-{{-- <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('imagen', 'Imagen') }}</label>
-    <div>
-        {{ Form::file('imagen', ['class' => 'form-control' . ($errors->has('imagen') ? ' is-invalid' : ''), 'placeholder' => 'Imagen']) }}
-        {!! $errors->first('imagen', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Proyecto <b>imagen</b> instruction.</small>
-    </div>
-</div>
-<div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('video', 'Video') }}</label>
-    <div>
-        {{ Form::file('video', ['class' => 'form-control' . ($errors->has('video') ? ' is-invalid' : ''), 'placeholder' => 'Video']) }}
-        {!! $errors->first('video', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Proyecto <b>video</b> instruction.</small>
-    </div>
-</div> --}}
 
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('fecha_limite') }}</label>
+    <label class="form-label" for="fecha_limite">Fecha Limite</label>
     <div>
-        {{ Form::date('fecha_limite', $proyecto->fecha_limite, ['class' => 'form-control' .
-        ($errors->has('fecha_limite') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Limite']) }}
+        <input type="date" name="fecha_limite" id="fecha_limite" class="form-control{{ $errors->has('fecha_limite') ? ' is-invalid' : '' }}" value="{{ old('fecha_limite', $proyecto->fecha_limite) }}" placeholder="Fecha Limite">
         {!! $errors->first('fecha_limite', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>fecha_limite</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('duracion_campaña') }}</label>
+    <label class="form-label" for="duracion_campaña">Duracion Campaña</label>
     <div>
-        {{ Form::text('duracion_campaña', $proyecto->duracion_campaña, ['class' => 'form-control' .
-        ($errors->has('duracion_campaña') ? ' is-invalid' : ''), 'placeholder' => 'Duracion Campaña']) }}
+        <input type="text" name="duracion_campaña" id="duracion_campaña" class="form-control{{ $errors->has('duracion_campaña') ? ' is-invalid' : '' }}" value="{{ old('duracion_campaña', $proyecto->duracion_campaña) }}" placeholder="Duracion Campaña">
         {!! $errors->first('duracion_campaña', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>duracion_campaña</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('monto_meta') }}</label>
+    <label class="form-label" for="monto_meta">Monto Meta</label>
     <div>
-        {{ Form::text('monto_meta', $proyecto->monto_meta, ['class' => 'form-control' .
-        ($errors->has('monto_meta') ? ' is-invalid' : ''), 'placeholder' => 'Monto Meta']) }}
+        <input type="text" name="monto_meta" id="monto_meta" class="form-control{{ $errors->has('monto_meta') ? ' is-invalid' : '' }}" value="{{ old('monto_meta', $proyecto->monto_meta) }}" placeholder="Monto Meta">
         {!! $errors->first('monto_meta', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>monto_meta</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('riesgos_desafios') }}</label>
+    <label class="form-label" for="riesgos_desafios">Riesgos Desafios</label>
     <div>
-        {{ Form::text('riesgos_desafios', $proyecto->riesgos_desafios, ['class' => 'form-control' .
-        ($errors->has('riesgos_desafios') ? ' is-invalid' : ''), 'placeholder' => 'Riesgos Desafios']) }}
+        <input type="text" name="riesgos_desafios" id="riesgos_desafios" class="form-control{{ $errors->has('riesgos_desafios') ? ' is-invalid' : '' }}" value="{{ old('riesgos_desafios', $proyecto->riesgos_desafios) }}" placeholder="Riesgos Desafios">
         {!! $errors->first('riesgos_desafios', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">proyecto <b>riesgos_desafios</b> instruction.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('tipo_proyecto', 'Tipo de Proyecto') }}</label>
+    <label class="form-label" for="tipo_proyecto">Tipo de Proyecto</label>
     <div>
-        {{ Form::select('tipo_proyecto', [
-            'individuo' => 'Individuo',
-            'empresa' => 'Empresa',
-            'organizacion_sin_fines_de_lucro' => 'Organización sin Fines de Lucro'
-            ], $proyecto->tipo_proyecto, [
-                'class' => 'form-control' . ($errors->has('tipo_proyecto') ? ' is-invalid' : ''),
-                'placeholder' => 'Seleccionar Tipo de Proyecto'
-            ])
-        }}
+        <select name="tipo_proyecto" id="tipo_proyecto" class="form-control{{ $errors->has('tipo_proyecto') ? ' is-invalid' : '' }}">
+            <option value="">Seleccionar Tipo de Proyecto</option>
+            <option value="individuo" {{ old('tipo_proyecto', $proyecto->tipo_proyecto) == 'individuo' ? 'selected' : '' }}>Individuo</option>
+            <option value="empresa" {{ old('tipo_proyecto', $proyecto->tipo_proyecto) == 'empresa' ? 'selected' : '' }}>Empresa</option>
+            <option value="organizacion_sin_fines_de_lucro" {{ old('tipo_proyecto', $proyecto->tipo_proyecto) == 'organizacion_sin_fines_de_lucro' ? 'selected' : '' }}>Organización sin Fines de Lucro</option>
+        </select>
         {!! $errors->first('tipo_proyecto', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">Selecciona el tipo de proyecto.</small>
     </div>
@@ -136,108 +106,93 @@
 
 <h3 class="mb-4">Información del Historia</h3><hr>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('historia_titulo', 'Título') }}</label>
+    <label class="form-label" for="historia_titulo">Título</label>
     <div>
-        {{ Form::text('historia_titulo', $proyecto->historia_titulo , ['class' => 'form-control', 'placeholder' => 'Título']) }}
+        <input type="text" name="historia_titulo" id="historia_titulo" class="form-control" value="{{ old('historia_titulo', $proyecto->historia_titulo) }}" placeholder="Título">
         {!! $errors->first('historia_titulo', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('historia_texto', 'Texto') }}</label>
+    <label class="form-label" for="historia_texto">Texto</label>
     <div>
-        {{ Form::textarea('historia_texto', $proyecto->historia_texto , ['class' => 'form-control mt-2', 'rows' => 4, 'placeholder' => 'Texto']) }}
+        <textarea name="historia_texto" id="historia_texto" class="form-control mt-2" rows="4" placeholder="Texto">{{ old('historia_texto', $proyecto->historia_texto) }}</textarea>
         {!! $errors->first('historia_texto', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-{{-- <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('historia_imagen', 'Imagen') }}</label>
-    <div>
-        {{ Form::file('historia_imagen', ['class' => 'form-control' . ($errors->has('historia_imagen') ? ' is-invalid' : ''), 'placeholder' => 'Imagen']) }}
-        {!! $errors->first('historia_imagen', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Proyecto <b>imagen</b> instruction.</small>
-    </div>
-</div>
-<div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('historia_video', 'Video') }}</label>
-    <div>
-        {{ Form::file('historia_video', ['class' => 'form-control' . ($errors->has('historia_video') ? ' is-invalid' : ''), 'placeholder' => 'Video']) }}
-        {!! $errors->first('historia_video', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Proyecto <b>video</b> instruction.</small>
-    </div>
-</div> --}}
 
 <h3 class="mb-4">Información de la Recompensa</h3>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_titulo', 'Título') }}</label>
+    <label class="form-label" for="recompensa_titulo">Título</label>
     <div>
-        {{ Form::text('recompensa_titulo', $proyecto->recompensa_titulo ?? old('recompensa_titulo'), ['class' => 'form-control', 'placeholder' => 'Título']) }}
+        <input type="text" name="recompensa_titulo" id="recompensa_titulo" class="form-control" value="{{ old('recompensa_titulo', $proyecto->recompensa_titulo) }}" placeholder="Título">
         {!! $errors->first('recompensa_titulo', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_monto', 'Monto') }}</label>
+    <label class="form-label" for="recompensa_monto">Monto</label>
     <div>
-        {{ Form::text('recompensa_monto', $proyecto->recompensa_monto ?? old('recompensa_monto'), ['class' => 'form-control', 'placeholder' => 'Monto']) }}
+        <input type="text" name="recompensa_monto" id="recompensa_monto" class="form-control" value="{{ old('recompensa_monto', $proyecto->recompensa_monto) }}" placeholder="Monto">
         {!! $errors->first('recompensa_monto', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-{{-- <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_imagen', 'Imagen') }}</label>
-    <div>
-        {{ Form::file('recompensa_imagen', ['class' => 'form-control' . ($errors->has('recompensa_imagen') ? ' is-invalid' : ''), 'placeholder' => 'Imagen']) }}
-        {!! $errors->first('recompensa_imagen', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Recompensa <b>imagen</b> instruction.</small>
-    </div>
-</div> --}}
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_descripcion', 'Descripción') }}</label>
+    <label class="form-label" for="recompensa_descripcion">Descripción</label>
     <div>
-        {{ Form::textarea('recompensa_descripcion', $proyecto->recompensa_descripcion ?? old('recompensa_descripcion'), ['class' => 'form-control', 'rows' => 4, 'placeholder' => 'Descripción']) }}
+        <textarea name="recompensa_descripcion" id="recompensa_descripcion" class="form-control" rows="4" placeholder="Descripción">{{ old('recompensa_descripcion', $proyecto->recompensa_descripcion) }}</textarea>
         {!! $errors->first('recompensa_descripcion', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_patrocinadores', 'Patrocinadores') }}</label>
+    <label class="form-label" for="recompensa_patrocinadores">Patrocinadores</label>
     <div>
-        {{ Form::select('recompensa_patrocinadores', ['Sí' => 'Sí', 'No' => 'No'], $proyecto->recompensa_patrocinadores ?? old('recompensa_patrocinadores'), ['class' => 'form-control', 'placeholder' => 'Seleccionar']) }}
+        <select name="recompensa_patrocinadores" id="recompensa_patrocinadores" class="form-control">
+            <option value="">Seleccionar</option>
+            <option value="Sí" {{ old('recompensa_patrocinadores', $proyecto->recompensa_patrocinadores) == 'Sí' ? 'selected' : '' }}>Sí</option>
+            <option value="No" {{ old('recompensa_patrocinadores', $proyecto->recompensa_patrocinadores) == 'No' ? 'selected' : '' }}>No</option>
+        </select>
         {!! $errors->first('recompensa_patrocinadores', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_envio', 'Envío') }}</label>
+    <label class="form-label" for="recompensa_envio">Envío</label>
     <div>
-        {{ Form::select('recompensa_envio', ['envios_todo_mundo' => 'Envíos a todo el mundo', 'envios_algunos_paises' => 'Envíos a algunos países', 'retiro_en_sitio' => 'Retiro en el sitio, evento o servicio (sin envío)', 'recompensa_digital' => 'Recompensa digital (sin envío)'], $proyecto->recompensa_envio ?? old('recompensa_envio'), ['class' => 'form-control', 'placeholder' => 'Seleccionar']) }}
+        <select name="recompensa_envio" id="recompensa_envio" class="form-control">
+            <option value="">Seleccionar</option>
+            <option value="envios_todo_mundo" {{ old('recompensa_envio', $proyecto->recompensa_envio) == 'envios_todo_mundo' ? 'selected' : '' }}>Envíos a todo el mundo</option>
+            <option value="envios_algunos_paises" {{ old('recompensa_envio', $proyecto->recompensa_envio) == 'envios_algunos_paises' ? 'selected' : '' }}>Envíos a algunos países</option>
+            <option value="retiro_en_sitio" {{ old('recompensa_envio', $proyecto->recompensa_envio) == 'retiro_en_sitio' ? 'selected' : '' }}>Retiro en el sitio, evento o servicio (sin envío)</option>
+            <option value="recompensa_digital" {{ old('recompensa_envio', $proyecto->recompensa_envio) == 'recompensa_digital' ? 'selected' : '' }}>Recompensa digital (sin envío)</option>
+        </select>
         {!! $errors->first('recompensa_envio', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_fecha_entrega', 'Fecha de Entrega') }}</label>
+    <label class="form-label" for="recompensa_fecha_entrega">Fecha de Entrega</label>
     <div>
-        {{ Form::date('recompensa_fecha_entrega', $proyecto->recompensa_fecha_entrega , ['class' => 'form-control', 'placeholder' => 'Fecha de Entrega']) }}
+        <input type="date" name="recompensa_fecha_entrega" id="recompensa_fecha_entrega" class="form-control" value="{{ old('recompensa_fecha_entrega', $proyecto->recompensa_fecha_entrega) }}" placeholder="Fecha de Entrega">
         {!! $errors->first('recompensa_fecha_entrega', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_cantidad', 'Cantidad') }}</label>
+    <label class="form-label" for="recompensa_cantidad">Cantidad</label>
     <div>
-        {{ Form::text('recompensa_cantidad', $proyecto->recompensa_cantidad ?? old('recompensa_cantidad'), ['class' => 'form-control', 'placeholder' => 'Cantidad']) }}
+        <input type="text" name="recompensa_cantidad" id="recompensa_cantidad" class="form-control" value="{{ old('recompensa_cantidad', $proyecto->recompensa_cantidad) }}" placeholder="Cantidad">
         {!! $errors->first('recompensa_cantidad', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">{{ Form::label('recompensa_tiempo_oferta', 'Tiempo de Oferta') }}</label>
+    <label class="form-label" for="recompensa_tiempo_oferta">Tiempo de Oferta</label>
     <div>
-        {{ Form::text('recompensa_tiempo_oferta', $proyecto->recompensa_tiempo_oferta ?? old('recompensa_tiempo_oferta'), ['class' => 'form-control', 'placeholder' => 'Tiempo de Oferta']) }}
+        <input type="text" name="recompensa_tiempo_oferta" id="recompensa_tiempo_oferta" class="form-control" value="{{ old('recompensa_tiempo_oferta', $proyecto->recompensa_tiempo_oferta) }}" placeholder="Tiempo de Oferta">
         {!! $errors->first('recompensa_tiempo_oferta', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 
-
-    <div class="form-footer">
-        <div class="text-end">
-            <div class="d-flex">
-                <a href="/proyecto" class="btn btn-danger">Cancel</a>
-                <button type="submit" class="btn btn-primary ms-auto ajax-submit">Submit</button>
-            </div>
+<div class="form-footer">
+    <div class="text-end">
+        <div class="d-flex">
+            <a href="{{ route('proyecto.index') }}" class="btn btn-danger">Cancel</a>
+            <button type="submit" class="btn btn-primary ms-auto ajax-submit">Submit</button>
         </div>
     </div>
+</div>
