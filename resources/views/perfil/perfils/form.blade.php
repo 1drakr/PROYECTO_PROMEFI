@@ -111,23 +111,7 @@
     </div>
 </div>
 
-<div class="form-group mb-3">
-    <label class="form-label">Id Rol</label>
-    <div>
-        <input type="text" name="id_rol" value="{{ old('id_rol', $perfil->id_rol) }}" class="form-control{{ $errors->has('id_rol') ? ' is-invalid' : '' }}" placeholder="Id Rol">
-        {!! $errors->first('id_rol', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">perfil <b>id_rol</b> instruction.</small>
-    </div>
-</div>
 
-<div class="form-group mb-3">
-    <label class="form-label">Estado</label>
-    <div>
-        <input type="text" name="Estado" value="{{ old('Estado', $perfil->Estado) }}" class="form-control{{ $errors->has('Estado') ? ' is-invalid' : '' }}" placeholder="Estado">
-        {!! $errors->first('Estado', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">perfil <b>Estado</b> instruction.</small>
-    </div>
-</div>
 
 <div class="form-footer">
     <div class="text-end">
