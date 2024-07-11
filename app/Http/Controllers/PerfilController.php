@@ -80,7 +80,7 @@ class PerfilController extends Controller
         $perfil->id_rol = $request->input('id_rol');
         $perfil->save();
 
-        return redirect()->route('perfils.edit')
+        return redirect()->route('perfil.index')
             ->with('success', 'Rol asignado exitosamente');
     }
 

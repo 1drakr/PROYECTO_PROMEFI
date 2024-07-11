@@ -73,7 +73,6 @@ Route::group(['middleware' => ['auth', 'role:Administrador']], function () {
     Route::resource('/algoritmo', AlgoritmoController::class);
     Route::get('/algoritmo/predict', [AlgoritmoController::class, 'predict'])->name('algoritmo.predict');
 
-
     // COMENTARIO
     Route::resource('comentario', ComentarioController::class);
     Route::get('comentario/{comentario}/respuesta', [ComentarioController::class, 'createResponse'])->name('respuesta.create');
@@ -99,7 +98,6 @@ Route::group(['middleware' => ['auth', 'role:Creador|Usuario']], function () {
     Route::resource('/recompensa', RecompensaController::class);
     Route::resource('/pago', PagoController::class); // Ruta para pagos
 });
-
 
 // Rutas accesibles por el rol Donador
 Route::group(['middleware' => ['auth', 'role:Donador']], function () {
