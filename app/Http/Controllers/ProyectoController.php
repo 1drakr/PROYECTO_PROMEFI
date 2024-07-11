@@ -10,6 +10,7 @@ use App\Models\Historia;
 use App\Models\Recompensa;
 use App\Models\Perfil;
 use App\Models\Finalizacionproyecto;
+use App\Models\Score;
 
 class ProyectoController extends Controller
 {
@@ -98,6 +99,13 @@ class ProyectoController extends Controller
             'id_usuario' => auth()->user()->id,
             'fecha_registro' =>now()->format('Y-m-d'),
             'id_estado' => 1, // Asumiendo que "Solicitar Creacion" tiene id 1 en la tabla estado
+        ]);
+
+        $randomScore = mt_rand(10, 100) / 100;
+
+        Score::create([
+            'id_proyecto' => $proyecto->id_proyecto,
+            'score' => $randomScore,
         ]);
 
         return redirect()->route('proyecto.index')

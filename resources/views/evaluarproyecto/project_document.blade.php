@@ -64,6 +64,35 @@
             <p><strong>Story Title:</strong> {{ $solicitud->proyecto->historia->titulo }}</p>
             <p><strong>Story Text:</strong> {{ $solicitud->proyecto->historia->texto }}</p>
         </div>
+        <div class="section">
+            <h2>Puntuacion de Popularidad</h2>
+            <p><strong>Puntuacion:</strong> {{ $score->score }}</p>
+            <canvas id="scoreChart" width="400" height="200"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                var ctx = document.getElementById('scoreChart').getContext('2d');
+                var scoreChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Puntuacion'],
+                        datasets: [{
+                            label: 'Puntuacion',
+                            data: [{{ $score->score * 100 }}],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            </script>
     </div>
 </body>
 </html>

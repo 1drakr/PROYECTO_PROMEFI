@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluarproyecto;
 use App\Models\Proyecto;
+use App\Models\Score;
 use App\Models\SolicitudProyecto;
 use App\Models\ValidacionProyecto;
+use App\Charts\ScoreChart;  // Si estás usando una librería de gráficos
 
 
 
@@ -41,10 +43,13 @@ class EvaluarproyectoController extends Controller
             'proyecto.historia',
         ])->findOrFail($request->input('solicitud_id'));
 
+        $score = Score::where('id_proyecto', $solicitud->proyecto->id_proyecto)->first();
+
+
         // Buscar un evaluarproyecto existente o crear uno nuevo
         $evaluarproyecto = Evaluarproyecto::where('id_solicitud', $solicitud->id_solicitudProy)->first() ?? new Evaluarproyecto(['id_solicitud' => $solicitud->id_solicitudProy]);
 
-        $pdf = PDF::loadView('evaluarproyecto.project_document', compact('solicitud'));
+        $pdf = PDF::loadView('evaluarproyecto.project_document', compact('solicitud','score'));
         $pdfPath = 'public/project_document.pdf';  // Cambia esto para guardar en la ubicación correcta
         $pdf->save(storage_path('app/' . $pdfPath));  // Guarda el PDF en la ubicación correcta
 
