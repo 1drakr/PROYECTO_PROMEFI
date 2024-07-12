@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluarproyecto;
 use App\Models\Proyecto;
 use App\Models\Score;
-use App\Models\SolicitudProyecto;
+use App\Models\Solicitudproyecto;
 use App\Models\ValidacionProyecto;
 use App\Charts\ScoreChart;  // Si estás usando una librería de gráficos
 
