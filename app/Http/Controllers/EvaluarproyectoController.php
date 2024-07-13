@@ -37,7 +37,7 @@ class EvaluarproyectoController extends Controller
 
     public function create(Request $request)
     {
-        $solicitud = Solicitudproyecto::with([
+        $solicitud = SolicitudProyecto::with([
             'proyecto.perfil.user',
             'proyecto.estado',
             'proyecto.historia',
@@ -47,7 +47,7 @@ class EvaluarproyectoController extends Controller
 
 
         // Buscar un evaluarproyecto existente o crear uno nuevo
-        $evaluarproyecto = EvaluarProyecto::where('id_solicitud', $solicitud->id_solicitudProy)->first() ?? new Evaluarproyecto(['id_solicitud' => $solicitud->id_solicitudProy]);
+        $evaluarproyecto = Evaluarproyecto::where('id_solicitud', $solicitud->id_solicitudProy)->first() ?? new Evaluarproyecto(['id_solicitud' => $solicitud->id_solicitudProy]);
 
         $pdf = PDF::loadView('evaluarproyecto.project_document', compact('solicitud','score'));
         $pdfPath = 'public/project_document.pdf';  // Cambia esto para guardar en la ubicación correcta
