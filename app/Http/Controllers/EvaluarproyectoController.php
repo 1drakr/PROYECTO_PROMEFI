@@ -113,7 +113,7 @@ class EvaluarproyectoController extends Controller
             $validacionProyecto->save();
         } else {
             // Si no existe, crear una nueva entrada
-            $validacionProyecto = new ValidacionProyecto();
+            $validacionProyecto = new Validacionproyecto();
             $validacionProyecto->id_evaluacionproy = $evaluarproyecto->id_evaluarproy;
             $validacionProyecto->id_perfil = $id_perfil;
             $validacionProyecto->id_estado = $request->input('id_estado');
