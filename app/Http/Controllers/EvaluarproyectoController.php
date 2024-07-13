@@ -103,7 +103,7 @@ class EvaluarproyectoController extends Controller
         $evaluarproyecto->update($request->except(['documento_proyecto', 'documento_evaluacion', 'documento_validacion']));
 
         // Verificar si ya existe una entrada en ValidacionProyecto con el mismo id_evaluacionproy
-        $validacionProyecto = ValidacionProyecto::where('id_evaluacionproy', $evaluarproyecto->id_evaluarproy)->first();
+        $validacionProyecto = Validacionproyecto::where('id_evaluacionproy', $evaluarproyecto->id_evaluarproy)->first();
 
         if ($validacionProyecto) {
             // Si existe, actualizar la entrada existente
