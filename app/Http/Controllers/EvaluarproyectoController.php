@@ -37,7 +37,7 @@ class EvaluarproyectoController extends Controller
 
     public function create(Request $request)
     {
-        $solicitud = SolicitudProyecto::with([
+        $solicitud = Solicitudproyecto::with([
             'proyecto.perfil.user',
             'proyecto.estado',
             'proyecto.historia',
